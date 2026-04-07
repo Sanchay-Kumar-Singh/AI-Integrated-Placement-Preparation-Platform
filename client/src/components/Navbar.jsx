@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
 import { useState, useEffect, useRef } from "react";
 import first from "../assets/image.png";
@@ -10,6 +10,7 @@ const Navbar = () => {
   const { openSignIn } = useClerk();
 
   const [openMenu, setOpenMenu] = useState(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const menuRef = useRef();
 
@@ -18,6 +19,7 @@ const Navbar = () => {
     const handleClickOutside = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
         setOpenMenu(null);
+        setMobileOpen(false);
       }
     };
 
@@ -43,11 +45,11 @@ const Navbar = () => {
         { name: "C", path: "/c" },
         { name: "Python", path: "/python" },
         { name: "Java", path: "/java" },
-        { name: "C++", path: "/cpp" }, // FIXED
+        { name: "C++", path: "/cpp" },
         { name: "DSA", path: "/dsa" },
         { name: "DSA Coding", path: "/dsa-coding" },
-          {name:"150 Days Code",path:"/100-days-code"},
-                  { name: "Compiler", path: "/compiler" },
+        { name: "150 Days Code", path: "/100-days-code" },
+        { name: "Compiler", path: "/compiler" },
         { name: "Core Subjects", path: "/core-subjects" },
       ],
     },
@@ -78,99 +80,142 @@ const Navbar = () => {
     {
       title: "AI Tools Services",
       key: "ai",
-   items: [
-  // 🔥 Core / Entry
-  // { name: "Dashboard", path: "/ai" },
-  { name: "AI Roadmap", path: "/ai/roadmap-generator" },
-  { name: "AI Quiz", path: "/ai/tech-quiz" },
-
-  // 🎯 Interview & Career
-  { name: "AI Voice Interview", path: "/ai/voice-interview" },
-  { name: "AI Chat Interview", path: "/ai/mock-interview" },
-    {name:"Ai Coding Practice", path:"/ai/coding-practice"},
-  { name: "AI Resume Analyzer", path: "/ai/review-resume" },
-
-  // ✍️ Content Creation
-  { name: "AI Write Article", path: "/ai/write-article" },
-  { name: "AI Blog Titles", path: "/ai/blog-titles" },
-
-  // 🎨 AI Tools (Utilities)
-  { name: "AI Generate Images", path: "/ai/generate-images" },
-  { name: "AI Remove BGV", path: "/ai/remove-background" },
-  { name: "AI Remove Object", path: "/ai/remove-object" },
-
-  // 🌐 Social / Community
-  // { name: "Community", path: "/ai/community" },
-]
+      items: [
+        { name: "AI Roadmap", path: "/ai/roadmap-generator" },
+        { name: "AI Quiz", path: "/ai/tech-quiz" },
+        { name: "AI Voice Interview", path: "/ai/voice-interview" },
+        { name: "AI Chat Interview", path: "/ai/mock-interview" },
+        { name: "Ai Coding Practice", path: "/ai/coding-practice" },
+        { name: "AI Resume Analyzer", path: "/ai/review-resume" },
+        { name: "AI Write Article", path: "/ai/write-article" },
+        { name: "AI Blog Titles", path: "/ai/blog-titles" },
+        { name: "AI Generate Images", path: "/ai/generate-images" },
+        { name: "AI Remove BGV", path: "/ai/remove-background" },
+        { name: "AI Remove Object", path: "/ai/remove-object" },
+      ],
     },
   ];
 
-return (
-  <div
-    ref={menuRef}
-    className={`fixed top-0 left-0 z-50 w-full flex justify-between items-center py-2 px-4 sm:px-20 xl:px-32 transition-all duration-300 ${
-      scrolled
-        ? "bg-white/80 backdrop-blur-md shadow-sm"
-        : "bg-transparent"
-    }`}
-  >
-    {/* LOGO */}
-    <img
-      onClick={() => navigate("/")}
-      src={first}
-      alt="logo"
-      className="w-32 sm:w-45 cursor-pointer rounded-xl"
-    />
+  return (
+    <div
+      ref={menuRef}
+      className={`fixed top-0 left-0 z-50 w-full flex justify-between items-center py-2 px-4 sm:px-20 xl:px-32 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/80 backdrop-blur-md shadow-sm"
+          : "bg-transparent"
+      }`}
+    >
+      {/* LOGO */}
+      <img
+        onClick={() => navigate("/")}
+        src={first}
+        alt="logo"
+        className="w-32 cursor-pointer rounded-xl"
+      />
 
-    {/* MENU */}
-    <div className="hidden md:flex gap-8 text-sm font-medium md:text-[18px] text-gray-800">
-      {menuItems.map((menu) => (
-        <div key={menu.key} className="relative">
-
-          {/* MAIN TITLE */}
-          <div
-            onClick={() =>
-              setOpenMenu(openMenu === menu.key ? null : menu.key)
-            }
-            className="flex items-center gap-1 cursor-pointer hover:text-blue-600"
-          >
-            {menu.title}
-            <ChevronDown size={16} />
-          </div>
-
-          {/* DROPDOWN */}
-          {openMenu === menu.key && (
-            <div className="absolute top-full left-0 mt-2 md:text-[15px] bg-white shadow-lg rounded-lg w-52 py-2">
-              {menu.items.map((item, i) => (
-                <div
-                  key={i}
-                  onClick={() => {
-                    navigate(item.path);
-                    setOpenMenu(null);
-                  }}
-                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                >
-                  {item.name}
-                </div>
-              ))}
+      {/* DESKTOP MENU */}
+      <div className="hidden md:flex gap-8 text-sm font-medium md:text-[18px] text-gray-800">
+        {menuItems.map((menu) => (
+          <div key={menu.key} className="relative">
+            <div
+              onClick={() =>
+                setOpenMenu(openMenu === menu.key ? null : menu.key)
+              }
+              className="flex items-center gap-1 cursor-pointer hover:text-blue-600"
+            >
+              {menu.title}
+              <ChevronDown size={16} />
             </div>
+
+            {openMenu === menu.key && (
+              <div className="absolute top-full left-0 mt-2 bg-white shadow-lg rounded-lg w-52 py-2">
+                {menu.items.map((item, i) => (
+                  <div
+                    key={i}
+                    onClick={() => {
+                      navigate(item.path);
+                      setOpenMenu(null);
+                    }}
+                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  >
+                    {item.name}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* RIGHT */}
+      <div className="flex items-center gap-4">
+        {user ? (
+          <UserButton />
+        ) : (
+          <button
+            onClick={openSignIn}
+            className="hidden md:flex items-center gap-2 rounded-full text-sm bg-blue-600 text-white px-6 py-2.5"
+          >
+            Get started <ArrowRight className="w-4 h-4" />
+          </button>
+        )}
+
+        {/* MOBILE ICON */}
+        <div className="md:hidden">
+          {mobileOpen ? (
+            <X onClick={() => setMobileOpen(false)} />
+          ) : (
+            <Menu onClick={() => setMobileOpen(true)} />
           )}
         </div>
-      ))}
-    </div>
+      </div>
 
-    {/* RIGHT */}
-    {user ? (
-      <UserButton />
-    ) : (
-      <button
-        onClick={openSignIn}
-        className="flex items-center gap-2 rounded-full text-sm bg-blue-600 text-white px-6 py-2.5"
-      >
-        Get started <ArrowRight className="w-4 h-4" />
-      </button>
-    )}
-  </div>
-);
-}
+      {/* MOBILE MENU */}
+      {mobileOpen && (
+        <div className="absolute top-full left-0 w-full bg-white shadow-md p-4 md:hidden">
+          {menuItems.map((menu) => (
+            <div key={menu.key} className="mb-2">
+              <div
+                onClick={() =>
+                  setOpenMenu(openMenu === menu.key ? null : menu.key)
+                }
+                className="flex justify-between items-center py-2 font-medium"
+              >
+                {menu.title}
+                <ChevronDown size={16} />
+              </div>
+
+              {openMenu === menu.key && (
+                <div className="pl-4">
+                  {menu.items.map((item, i) => (
+                    <div
+                      key={i}
+                      onClick={() => {
+                        navigate(item.path);
+                        setMobileOpen(false);
+                      }}
+                      className="py-2 text-sm text-gray-600"
+                    >
+                      {item.name}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+
+          {!user && (
+            <button
+              onClick={openSignIn}
+              className="mt-4 w-full bg-blue-600 text-white py-2 rounded"
+            >
+              Get Started
+            </button>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
 export default Navbar;

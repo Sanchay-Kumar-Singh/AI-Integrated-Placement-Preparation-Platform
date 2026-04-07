@@ -2,48 +2,27 @@ import { useState } from "react";
 import axios from "axios";
 import { useAuth } from "@clerk/clerk-react";
 import toast from "react-hot-toast";
-import {
-  FiCode,
-  FiRefreshCw,
-  FiExternalLink,
-  FiPlayCircle,
-  FiLayers,
-} from "react-icons/fi";
+import { FiCode, FiPlayCircle } from "react-icons/fi";
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
-const AICodingPractice = () => {
+export default function AICodingQuiz() {
   const { getToken } = useAuth();
 
-  const [step, setStep] = useState(1);
   const [topic, setTopic] = useState("");
   const [difficulty, setDifficulty] = useState("Mixed");
-  const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  // ==============================
-  // SAFE LINK OPENER (FIXED)
-  // ==============================
-  const openLink = (link) => {
-    if (!link) return toast.error("No link available");
+  const [answers, setAnswers] = useState({});
+  const [score, setScore] = useState(null);
 
-    const safeLink =
-      link.startsWith("http://") || link.startsWith("https://")
-        ? link
-        : `https://${link}`;
-
-    window.open(safeLink, "_blank");
-  };
-
-  // ==============================
-  // START GENERATION
-  // ==============================
+  // ================= API =================
   const generateQuestions = async () => {
-    if (!topic) return toast.error("Please enter a topic");
+    if (!topic) return toast.error("Enter topic");
 
     try {
       setLoading(true);
-
       const { data } = await axios.post(
         "/api/ai/coding/start",
         { topic, difficulty },
@@ -56,177 +35,136 @@ const AICodingPractice = () => {
 
       if (data.success) {
         setQuestions(data.questions);
-        setStep(2);
-      } else {
-        toast.error("Failed to generate questions");
+        setAnswers({});
+        setScore(null);
       }
-    } catch (err) {
-      console.log(err);
-      toast.error("AI error while generating questions");
+    } catch {
+      toast.error("Error generating questions");
     } finally {
       setLoading(false);
     }
   };
 
-  // ==============================
-  // REFRESH QUESTIONS
-  // ==============================
-  const refreshQuestions = async () => {
-    try {
-      setLoading(true);
+  // ================= ANSWER SELECT =================
+  const handleSelect = (qIndex, option) => {
+    setAnswers((prev) => ({ ...prev, [qIndex]: option }));
+  };
 
-      const { data } = await axios.post(
-        "/api/ai/coding/start",
-        { topic, difficulty },
-        {
-          headers: {
-            Authorization: `Bearer ${await getToken()}`,
-          },
-        }
-      );
+  // ================= SUBMIT =================
+  const handleSubmit = () => {
+    let correct = 0;
 
-      if (data.success) {
-        setQuestions(data.questions);
-        toast.success("New questions generated!");
-      }
-    } catch (err) {
-      toast.error("Failed to refresh questions");
-    } finally {
-      setLoading(false);
-    }
+    questions.forEach((q, i) => {
+      if (answers[i] === q.answer) correct++;
+    });
+
+    setScore(correct);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 md:p-10">
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 to-purple-200 p-6">
       <div className="max-w-5xl mx-auto">
 
         {/* HEADER */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-extrabold text-slate-800 flex items-center gap-2">
-            <FiCode className="text-purple-600" />
-            AI Coding Practice
+        <div className="bg-white p-6 rounded-2xl shadow mb-6">
+          <h1 className="text-2xl font-bold flex items-center gap-2 mb-4">
+            <FiCode /> AI Coding Quiz
           </h1>
-          <p className="text-slate-500 text-sm">
-            Get daily 3 coding problems from LeetCode, GFG & Naukri powered by AI
-          </p>
+
+          <input
+            value={topic}
+            onChange={(e) => setTopic(e.target.value)}
+            placeholder="Enter Topic (DSA, DBMS, OS...)"
+            className="w-full p-3 border rounded-lg mb-3"
+          />
+
+          <div className="flex gap-2 mb-4">
+            {["Easy", "Medium", "Hard", "Mixed"].map((lvl) => (
+              <button
+                key={lvl}
+                onClick={() => setDifficulty(lvl)}
+                className={`px-3 py-1 rounded ${
+                  difficulty === lvl
+                    ? "bg-purple-600 text-white"
+                    : "border"
+                }`}
+              >
+                {lvl}
+              </button>
+            ))}
+          </div>
+
+          <button
+            onClick={generateQuestions}
+            className="bg-black text-white px-4 py-2 rounded flex items-center gap-2"
+          >
+            <FiPlayCircle /> {loading ? "Generating..." : "Start Quiz"}
+          </button>
         </div>
 
-        {/* ===================== STEP 1 ===================== */}
-        {step === 1 && (
-          <div className="bg-white rounded-2xl shadow p-6 max-w-2xl mx-auto">
-            <div className="space-y-5">
+        {/* QUESTIONS */}
+        <div className="space-y-4">
+          {questions.map((q, i) => (
+            <div key={i} className="bg-white p-5 rounded-xl shadow">
+              <h3 className="font-semibold mb-3">
+                {i + 1}. {q.question}
+              </h3>
 
-              {/* TOPIC */}
-              <div>
-                <label className="text-sm font-semibold text-slate-700">
-                  Enter Topic
-                </label>
-                <input
-                  className="w-full mt-2 p-3 border rounded-xl bg-slate-50 outline-none focus:ring-2 focus:ring-purple-500"
-                  placeholder="Arrays, DP, Graph, SQL, Java, DSA..."
-                  value={topic}
-                  onChange={(e) => setTopic(e.target.value)}
-                />
-              </div>
-
-              {/* DIFFICULTY */}
-              <div>
-                <label className="text-sm font-semibold text-slate-700">
-                  Difficulty
-                </label>
-                <div className="grid grid-cols-4 gap-2 mt-2">
-                  {["Easy", "Medium", "Hard", "Mixed"].map((lvl) => (
-                    <button
-                      key={lvl}
-                      onClick={() => setDifficulty(lvl)}
-                      className={`p-2 rounded-lg border text-sm ${
-                        difficulty === lvl
-                          ? "bg-purple-600 text-white"
-                          : "bg-white"
-                      }`}
-                    >
-                      {lvl}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* BUTTON */}
-              <button
-                onClick={generateQuestions}
-                disabled={loading}
-                className="w-full bg-slate-900 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2"
-              >
-                {loading ? "Generating..." : (
-                  <>
-                    <FiPlayCircle /> Generate Questions
-                  </>
-                )}
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* ===================== STEP 2 ===================== */}
-        {step === 2 && (
-          <div className="space-y-6">
-
-            {/* TOP BAR */}
-            <div className="flex flex-wrap gap-3 justify-between items-center">
-              <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
-                <FiLayers /> Your 3 AI Coding Questions
-              </h2>
-
-              <button
-                onClick={refreshQuestions}
-                disabled={loading}
-                className="flex items-center gap-2 bg-purple-600 text-white px-4 py-2 rounded-lg"
-              >
-                <FiRefreshCw />
-                Next Day Questions
-              </button>
-            </div>
-
-            {/* QUESTIONS LIST */}
-            <div className="grid md:grid-cols-3 gap-5">
-              {questions.map((q, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-2xl shadow p-5 border"
-                >
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-xs font-bold text-purple-600 uppercase">
-                      {q.difficulty}
-                    </span>
-                    <span className="text-xs text-slate-500">
-                      {q.platform}
-                    </span>
-                  </div>
-
-                  <h3 className="font-bold text-slate-800 mb-2">
-                    {q.title}
-                  </h3>
-
-                  <p className="text-sm text-slate-600 mb-4">
-                    {q.description}
-                  </p>
-
-                  <button
-                    onClick={() => openLink(q.link)}
-                    className="flex items-center gap-2 text-sm text-blue-600 font-semibold"
+              <div className="space-y-2">
+                {q.options.map((opt, idx) => (
+                  <label
+                    key={idx}
+                    className={`block p-2 border rounded cursor-pointer ${
+                      answers[i] === opt
+                        ? "bg-purple-100 border-purple-500"
+                        : ""
+                    }`}
                   >
-                    Solve Now <FiExternalLink />
-                  </button>
-                </div>
-              ))}
-            </div>
+                    <input
+                      type="radio"
+                      name={`q-${i}`}
+                      value={opt}
+                      checked={answers[i] === opt}
+                      onChange={() => handleSelect(i, opt)}
+                      className="mr-2"
+                    />
+                    {opt}
+                  </label>
+                ))}
+              </div>
 
-          </div>
+              {/* SHOW CORRECT AFTER SUBMIT */}
+              {score !== null && (
+                <p className="mt-2 text-sm">
+                  ✅ Correct Answer:{" "}
+                  <span className="font-bold text-green-600">
+                    {q.answer}
+                  </span>
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* SUBMIT BUTTON */}
+        {questions.length > 0 && score === null && (
+          <button
+            onClick={handleSubmit}
+            className="mt-6 bg-green-600 text-white px-6 py-2 rounded"
+          >
+            Submit Quiz
+          </button>
         )}
 
+        {/* SCORE */}
+        {score !== null && (
+          <div className="mt-6 bg-white p-6 rounded-xl shadow text-center">
+            <h2 className="text-xl font-bold">
+              Your Score: {score} / {questions.length}
+            </h2>
+          </div>
+        )}
       </div>
     </div>
   );
-};
-
-export default AICodingPractice;
+}

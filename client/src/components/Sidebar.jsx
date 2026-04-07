@@ -34,11 +34,12 @@ const navItems = [
   // 🔥 Core / Entry
   { to: "/ai", label: "Dashboard", Icon: House },
   { to: "/ai/roadmap-generator", label: "AI Roadmap ", Icon: Sparkles },
-    { to: "/ai/tech-quiz", label: "AI Quiz", Icon: Hash },
   // 🎯 Interview & Career (HIGH PRIORITY)\
    { to: "/ai/voice-interview", label: "AI Voice Interview", Icon: Mic },
   { to: "/ai/mock-interview", label: "AI Chat Interview", Icon: Users },
+   { to: "/ai/tech-quiz", label: "AI Quiz", Icon: Hash },
   { to: "/ai/coding-practice", label: "AI Coding Practice", Icon: Code },
+  
   { to: "/ai/review-resume", label: "AI Resume Analyzer", Icon: FileText },
 
   // 📚 Learning & Growth
