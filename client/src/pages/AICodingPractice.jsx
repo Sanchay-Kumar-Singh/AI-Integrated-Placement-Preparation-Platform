@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "@clerk/clerk-react";
 import toast from "react-hot-toast";
-import { FiCode, FiPlayCircle } from "react-icons/fi";
+import { FiCode, FiRefreshCw, FiExternalLink, FiPlayCircle } from "react-icons/fi";
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
-export default function AICodingQuiz() {
+export default function AICodingPractice() {
   const { getToken } = useAuth();
 
   const [topic, setTopic] = useState("");
@@ -14,8 +14,9 @@ export default function AICodingQuiz() {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const [answers, setAnswers] = useState({});
-  const [score, setScore] = useState(null);
+  const [progress, setProgress] = useState({}); // { '2026-04-07': true }
+
+  const today = new Date().toISOString().split("T")[0];
 
   // ================= API =================
   const generateQuestions = async () => {
@@ -35,8 +36,6 @@ export default function AICodingQuiz() {
 
       if (data.success) {
         setQuestions(data.questions);
-        setAnswers({});
-        setScore(null);
       }
     } catch {
       toast.error("Error generating questions");
@@ -45,36 +44,42 @@ export default function AICodingQuiz() {
     }
   };
 
-  // ================= ANSWER SELECT =================
-  const handleSelect = (qIndex, option) => {
-    setAnswers((prev) => ({ ...prev, [qIndex]: option }));
+  const markCompleted = () => {
+    setProgress((prev) => ({ ...prev, [today]: true }));
+    toast.success("Day marked complete ✅");
   };
 
-  // ================= SUBMIT =================
-  const handleSubmit = () => {
-    let correct = 0;
+  // ================= CALENDAR =================
+  const getDaysInMonth = () => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const days = new Date(year, month + 1, 0).getDate();
 
-    questions.forEach((q, i) => {
-      if (answers[i] === q.answer) correct++;
+    return Array.from({ length: days }, (_, i) => {
+      const d = new Date(year, month, i + 1)
+        .toISOString()
+        .split("T")[0];
+      return d;
     });
-
-    setScore(correct);
   };
+
+  const days = getDaysInMonth();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-100 to-purple-200 p-6">
-      <div className="max-w-5xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 to-purple-100 p-6">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
 
-        {/* HEADER */}
-        <div className="bg-white p-6 rounded-2xl shadow mb-6">
+        {/* LEFT PANEL */}
+        <div className="md:col-span-2 bg-white p-6 rounded-2xl shadow">
           <h1 className="text-2xl font-bold flex items-center gap-2 mb-4">
-            <FiCode /> AI Coding Quiz
+            <FiCode /> AI Coding Practice
           </h1>
 
           <input
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
-            placeholder="Enter Topic (DSA, DBMS, OS...)"
+            placeholder="Enter Topic"
             className="w-full p-3 border rounded-lg mb-3"
           />
 
@@ -84,9 +89,7 @@ export default function AICodingQuiz() {
                 key={lvl}
                 onClick={() => setDifficulty(lvl)}
                 className={`px-3 py-1 rounded ${
-                  difficulty === lvl
-                    ? "bg-purple-600 text-white"
-                    : "border"
+                  difficulty === lvl ? "bg-purple-600 text-white" : "border"
                 }`}
               >
                 {lvl}
@@ -98,72 +101,55 @@ export default function AICodingQuiz() {
             onClick={generateQuestions}
             className="bg-black text-white px-4 py-2 rounded flex items-center gap-2"
           >
-            <FiPlayCircle /> {loading ? "Generating..." : "Start Quiz"}
+            <FiPlayCircle /> Generate
           </button>
-        </div>
 
-        {/* QUESTIONS */}
-        <div className="space-y-4">
-          {questions.map((q, i) => (
-            <div key={i} className="bg-white p-5 rounded-xl shadow">
-              <h3 className="font-semibold mb-3">
-                {i + 1}. {q.question}
-              </h3>
-
-              <div className="space-y-2">
-                {q.options.map((opt, idx) => (
-                  <label
-                    key={idx}
-                    className={`block p-2 border rounded cursor-pointer ${
-                      answers[i] === opt
-                        ? "bg-purple-100 border-purple-500"
-                        : ""
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name={`q-${i}`}
-                      value={opt}
-                      checked={answers[i] === opt}
-                      onChange={() => handleSelect(i, opt)}
-                      className="mr-2"
-                    />
-                    {opt}
-                  </label>
-                ))}
+          {/* QUESTIONS */}
+          <div className="grid md:grid-cols-2 gap-4 mt-6">
+            {questions.map((q, i) => (
+              <div key={i} className="border p-4 rounded-xl">
+                <h3 className="font-bold">{q.title}</h3>
+                <p className="text-sm text-gray-500">{q.description}</p>
+                <button
+                  onClick={() => window.open(q.link, "_blank")}
+                  className="text-blue-600 mt-2 flex items-center gap-1"
+                >
+                  Solve <FiExternalLink />
+                </button>
               </div>
+            ))}
+          </div>
 
-              {/* SHOW CORRECT AFTER SUBMIT */}
-              {score !== null && (
-                <p className="mt-2 text-sm">
-                  ✅ Correct Answer:{" "}
-                  <span className="font-bold text-green-600">
-                    {q.answer}
-                  </span>
-                </p>
-              )}
-            </div>
-          ))}
+          {questions.length > 0 && (
+            <button
+              onClick={markCompleted}
+              className="mt-6 bg-green-600 text-white px-4 py-2 rounded"
+            >
+              Mark Today Complete
+            </button>
+          )}
         </div>
 
-        {/* SUBMIT BUTTON */}
-        {questions.length > 0 && score === null && (
-          <button
-            onClick={handleSubmit}
-            className="mt-6 bg-green-600 text-white px-6 py-2 rounded"
-          >
-            Submit Quiz
-          </button>
-        )}
+        {/* RIGHT PANEL - CALENDAR */}
+        <div className="bg-white p-6 rounded-2xl shadow">
+          <h2 className="text-lg font-bold mb-4">Monthly Progress</h2>
 
-        {/* SCORE */}
-        {score !== null && (
-          <div className="mt-6 bg-white p-6 rounded-xl shadow text-center">
-            <h2 className="text-xl font-bold">
-              Your Score: {score} / {questions.length}
-            </h2>
+          <div className="grid grid-cols-7 gap-2 text-center">
+            {days.map((day, i) => (
+              <div
+                key={i}
+                className={`p-2 rounded text-sm ${
+                  progress[day]
+                    ? "bg-green-500 text-white"
+                    : "bg-gray-100"
+                }`}
+              >
+                {new Date(day).getDate()}
+              </div>
+            ))}
           </div>
-        )}
+        </div>
+
       </div>
     </div>
   );
