@@ -196,7 +196,7 @@ const Description = () => {
       </div>
 
       {/* 🔍 SEARCH BAR (CENTER) */}
-      <div className="mt-10 w-full max-w-xl flex items-center gap-2">
+      <div className="mt-10 md:w-full w-70 max-w-xl flex items-center gap-2">
         <input
           type="text"
           placeholder="Search anything (Java, DSA, Resume...)"

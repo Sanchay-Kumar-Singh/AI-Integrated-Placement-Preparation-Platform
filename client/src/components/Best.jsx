@@ -124,7 +124,7 @@ const Best = () => {
       </div>
    
     </section>
-       <img src={banner} alt="" className='md:w-320 w-55 mx-auto md:h-170 h-60 ml-13 md:ml-50 -mt-30' />
+       <img src={banner} alt="" className='md:w-320 w-66 mx-auto md:h-170 h-60 ml-13 md:ml-50 -mt-30' />
        <br />
     </>
   )
