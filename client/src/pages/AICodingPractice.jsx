@@ -1,35 +1,58 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useAuth } from "@clerk/clerk-react";
+import { useAuth, useUser } from "@clerk/clerk-react";
 import toast from "react-hot-toast";
-import { FiCode, FiRefreshCw, FiExternalLink, FiPlayCircle } from "react-icons/fi";
+import { FiCode, FiExternalLink, FiPlayCircle } from "react-icons/fi";
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
 export default function AICodingPractice() {
   const { getToken } = useAuth();
+  const { user } = useUser(); // ✅ get user
 
   const [topic, setTopic] = useState("");
   const [difficulty, setDifficulty] = useState("Mixed");
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const [progress, setProgress] = useState({}); // { '2026-04-07': true }
+  const [progress, setProgress] = useState({});
 
   const today = new Date().toISOString().split("T")[0];
 
-  // ================= API =================
+  // ================= LOAD PROGRESS =================
+  useEffect(() => {
+    if (!user) return;
+
+    const saved = localStorage.getItem(`progress_${user.id}`);
+    if (saved) {
+      setProgress(JSON.parse(saved));
+    }
+  }, [user]);
+
+  // ================= SAVE PROGRESS =================
+  const saveProgress = (updatedProgress) => {
+    if (!user) return;
+
+    localStorage.setItem(
+      `progress_${user.id}`,
+      JSON.stringify(updatedProgress)
+    );
+  };
+
+  // ================= GENERATE QUESTIONS =================
   const generateQuestions = async () => {
     if (!topic) return toast.error("Enter topic");
 
     try {
       setLoading(true);
+      const token = await getToken();
+
       const { data } = await axios.post(
         "/api/ai/coding/start",
         { topic, difficulty },
         {
           headers: {
-            Authorization: `Bearer ${await getToken()}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -44,9 +67,14 @@ export default function AICodingPractice() {
     }
   };
 
+  // ================= MARK COMPLETE =================
   const markCompleted = () => {
-    setProgress((prev) => ({ ...prev, [today]: true }));
-    toast.success("Day marked complete ✅");
+    const updated = { ...progress, [today]: true };
+
+    setProgress(updated);
+    saveProgress(updated); // ✅ save permanently
+
+    toast.success("Saved ✅ (will stay after login)");
   };
 
   // ================= CALENDAR =================
@@ -79,7 +107,7 @@ export default function AICodingPractice() {
           <input
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
-            placeholder="Enter Topic"
+            placeholder="Enter Topic Arrays, Strings, DP"
             className="w-full p-3 border rounded-lg mb-3"
           />
 
@@ -130,7 +158,7 @@ export default function AICodingPractice() {
           )}
         </div>
 
-        {/* RIGHT PANEL - CALENDAR */}
+        {/* RIGHT PANEL */}
         <div className="bg-white p-6 rounded-2xl shadow">
           <h2 className="text-lg font-bold mb-4">Monthly Progress</h2>
 
