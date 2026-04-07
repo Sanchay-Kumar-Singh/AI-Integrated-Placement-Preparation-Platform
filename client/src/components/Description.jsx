@@ -203,7 +203,7 @@ const Description = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-          className="flex-1 px-4 py-3 border border-gray-400 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-1 px-4 py-3 border w-20 border-gray-400 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
         />
 
         <button
