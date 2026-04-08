@@ -1,3 +1,14 @@
+// 3 Wordks 
+// if possible lobo design 
+// Navitems for mobile screen
+//Navbar height and siderbar should be managed
+// All quiz submit section the score an all
+// All Ai feature possible that to be saved in dashboard 
+// Plan should be managed 
+// Best Final Look Given to Website 
+
+
+
 // import { useNavigate } from "react-router-dom";
 // import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
 // import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
