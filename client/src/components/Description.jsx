@@ -176,7 +176,7 @@ const Description = () => {
 
       {/* Small lines */}
       <div className="flex flex-wrap justify-center gap-6 mb-8">
-        {Array.from({ length: 6 }).map((_, i) => (
+        {Array.from({ length: 4 }).map((_, i) => (
           <div key={i} className="w-24 h-[2px] bg-gray-400"></div>
         ))}
       </div>
