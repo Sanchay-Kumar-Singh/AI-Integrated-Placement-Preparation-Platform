@@ -124,7 +124,7 @@ const Navbar = () => {
         onClick={() => navigate("/")}
         src={first}
         alt="logo"
-        className="md:w-32 w-40 sm:w-40 cursor-pointer rounded-xl"
+        className="md:w-42 w-40 sm:w-40 cursor-pointer rounded-xl"
       />
 
       {/* DESKTOP MENU */}
