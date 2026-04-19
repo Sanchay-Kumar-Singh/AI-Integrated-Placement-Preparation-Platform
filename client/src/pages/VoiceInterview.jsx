@@ -121,11 +121,13 @@ const VoiceInterview = () => {
   };
 
   return (
-<>{/* TOP HEADING */}<h1 className="text-2xl  md:text-3xl font-extrabold mb-4 text-center w-full max-w-md mx-auto">
-  <span className="text-purple-500">AI Voice</span>{" "}
+<>{/* TOP HEADING */}<h1 className="text-2xl  bg-slate-900  md:text-3xl font-extrabold mb-4 text-center w-full max-w-md mx-auto ">
+
+    <span className="text-purple-500  ">AI Voice</span>{" "}
   <span className="text-white">Interview</span>
+
 </h1>
-    <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4 font-sans text-white md:-mt-20">
+    <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4 font-sans text-white  -mt-5 md:-mt-20">
       {/* TOP HEADING */}
       <div className="w-full max-w-md bg-slate-800 rounded-3xl shadow-2xl border border-slate-700 overflow-hidden">
         

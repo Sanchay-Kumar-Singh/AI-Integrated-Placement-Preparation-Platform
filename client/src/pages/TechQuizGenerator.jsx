@@ -186,26 +186,25 @@ Repeat for all 10 questions. No extra commentary.`;
             background: "#16161f",
             border: "1px solid #2a2a3a",
             borderRadius: 20,
-            padding: "2.5rem",
+            padding: "2rem",
             width: "100%",
-            maxWidth: 460,
+            maxWidth: 660,
           }}
-        >
+        >  
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
             <Sparkles size={22} color="#a78bfa" />
             <span
               style={{
-                fontFamily: "'Syne', sans-serif",
-                fontSize: 22,
-                fontWeight: 800,
+              
+                fontSize: 30,
                 color: "#e8e8f0",
               }}
             >
-              Quiz Generator
+             AI Quiz Generator
             </span>
           </div>
-          <p style={{ color: "#6b6b8a", fontSize: 13, marginBottom: 28 }}>
-            10 questions · instant feedback · final score
+          <p style={{ color: "#6b6b8a", fontSize: 18, marginBottom: 28 }}>
+            10 questions · instant feedback · <span style={{color:"#08d17d"}}>final score</span>
           </p>
 
           <form onSubmit={handleGenerate}>
