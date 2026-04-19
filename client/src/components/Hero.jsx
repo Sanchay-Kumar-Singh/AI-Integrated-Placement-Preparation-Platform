@@ -21,9 +21,7 @@ const Hero = () => {
           </h1>
 
           <p className="mt-4 max-w-xs sm:max-w-lg 2xl:max-w-xl m-auto max-sm:text-xs text-gray-600">
-            Prepare smarter, not harder. Generate personalized learning roadmaps,
-            practice AI-powered technical quizzes, improve your resume with instant
-            feedback, and master interviews — all in one powerful AI-driven platform.
+An AI-integrated placement ecosystem that unifies personalized learning, intelligent practice, and interview readiness tools to help students prepare efficiently and confidently.
           </p>
         </div>
 

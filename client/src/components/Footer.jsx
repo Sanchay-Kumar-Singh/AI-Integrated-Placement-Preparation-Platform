@@ -167,10 +167,10 @@ const Footer = () => {
       <div>
         <h2 className="font-semibold mb-5 text-white">Company</h2>
         <ul className="text-sm space-y-2 text-gray-300 md:text-[15px]">
-          <li><a href="/">Programming(DSA)</a></li>
-          <li><a href="#">Placementss Round </a></li>
-          <li><a href="#">Companies</a></li>
-          <li><a href="#">Ai Tools Services</a></li>
+          <li><a href="/c">Programming(DSA)</a></li>
+          <li><a href="/resume">Placementss Round </a></li>
+          <li><a href="/startups">Companies</a></li>
+          <li><a href="/ai/roadmap-generator">Ai Tools Services</a></li>
         </ul>
       </div>
 
