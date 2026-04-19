@@ -90,19 +90,23 @@ const Navbar = () => {
     {
       title: "AI Tools Services",
       key: "ai",
-      items: [
-        { name: "AI Roadmap", path: "/ai/roadmap-generator" },
-        { name: "AI Quiz", path: "/ai/tech-quiz" },
-        { name: "AI Voice Interview", path: "/ai/voice-interview" },
-        { name: "AI Chat Interview", path: "/ai/mock-interview" },
-        { name: "Ai Coding Practice", path: "/ai/coding-practice" },
-        { name: "AI Resume Analyzer", path: "/ai/review-resume" },
-        { name: "AI Write Article", path: "/ai/write-article" },
-        { name: "AI Blog Titles", path: "/ai/blog-titles" },
-        { name: "AI Generate Images", path: "/ai/generate-images" },
-        { name: "AI Remove BGV", path: "/ai/remove-background" },
-        { name: "AI Remove Object", path: "/ai/remove-object" },
-      ],
+    items: [
+  { name: "AI Roadmap", path: "/ai/roadmap-generator" },
+
+  { name: "AI Voice Interview", path: "/ai/voice-interview" },
+  { name: "AI Chat Interview", path: "/ai/mock-interview" },
+  { name: "AI Quiz", path: "/ai/tech-quiz" },
+  { name: "AI Coding Practice", path: "/ai/coding-practice" },
+
+  { name: "AI Resume Analyzer", path: "/ai/review-resume" },
+
+  { name: "AI Write Article", path: "/ai/write-article" },
+  { name: "AI Blog Titles", path: "/ai/blog-titles" },
+
+  { name: "AI Generate Images", path: "/ai/generate-images" },
+  { name: "AI Remove BGV", path: "/ai/remove-background" },
+  { name: "AI Remove Object", path: "/ai/remove-object" },
+]
     },
   ];
 
