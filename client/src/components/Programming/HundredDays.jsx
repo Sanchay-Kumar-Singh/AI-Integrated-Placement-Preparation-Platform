@@ -236,7 +236,7 @@ const HundredDays = () => {
               <img onClick={() => navigate("/")}
                           src={logo}
                           alt="logo"
-                          className="w-32 sm:w-40 cursor-pointer rounded"
+                          className="w-42 sm:w-40 cursor-pointer rounded"
                         />
             </div>
           </div>

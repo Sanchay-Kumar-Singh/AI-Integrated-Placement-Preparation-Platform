@@ -351,7 +351,7 @@ const Coding = () => {
                               <img onClick={() => navigate("/")}
                                   src={logo}
                                   alt="logo"
-                                  className="w-32 sm:w-45 cursor-pointer rounded-xl"
+                                  className="w-42 sm:w-45 cursor-pointer rounded-xl"
                               />
                           </div>
                           <div className="hidden md:flex gap-6 text-sm font-medium md:text-[20px] text-slate-800">

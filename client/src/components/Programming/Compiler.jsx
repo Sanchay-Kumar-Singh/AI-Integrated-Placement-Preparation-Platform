@@ -15,7 +15,7 @@ export default function Compiler() {
             <div className="text-3xl mb-2">
          <img src={logo} onClick={() => navigate("/")}
               alt="logo"
-              className="w-32 sm:w-41 cursor-pointer rounded"
+              className="w-42 sm:w-41 cursor-pointer rounded"
             />
             </div> <br />
             <h1 className="text-xl font-bold flex gap-2">   <Code2 /> Dev Compiler</h1>

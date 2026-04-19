@@ -1005,7 +1005,7 @@ const DSACoding = () => {
       {/* ── NAVBAR ── */}
       <nav style={{ background: '#0D0D15', borderBottom: '1px solid #1E1E2E', position: 'sticky', top: 0, zIndex: 50, backdropFilter: 'blur(12px)' }}>
         <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 24px', height: 80, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <img onClick={() => navigate('/')} src={logo} alt="logo" style={{ height: 55, cursor: 'pointer', borderRadius: 4 }} />
+          <img onClick={() => navigate('/')} src={logo} alt="logo" style={{ height: 65, cursor: 'pointer', borderRadius: 4 }} />
           <div style={{ display: 'flex', gap: 4 }}>
             {NAV.map(n => (
               <button key={n.id} onClick={() => setTab(n.id)} className="tab-btn"
