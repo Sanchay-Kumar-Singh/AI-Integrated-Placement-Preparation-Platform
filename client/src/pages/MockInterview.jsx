@@ -244,7 +244,7 @@ const MockInterview = () => {
           <div className="bg-white rounded-2xl shadow-xl p-8 border border-slate-100 max-w-2xl mx-auto">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-3 bg-purple-100 text-purple-600 rounded-lg"><FiActivity size={24}/></div>
-              <h2 className="text-xl font-bold">Configure Your Session</h2>
+              <h2 className="text-xl font-bold text-[30px]">AI chat Interview</h2>
             </div>
             
             <div className="space-y-5">
