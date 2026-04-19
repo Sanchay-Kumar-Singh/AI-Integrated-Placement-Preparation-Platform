@@ -42,48 +42,53 @@ const Sidebar = ({ sidebar, setSidebar }) => {
 
   return (
     <div
-      className={`w-60 bg-white border-r border-gray-200 flex flex-col items-center 
-      max-sm:fixed top-0 left-0 h-[100dvh]
+      className={`w-60 bg-white border-r border-gray-200 
+      flex flex-col
+      max-sm:fixed max-sm:top-0 max-sm:left-0 max-sm:h-[100dvh]
       ${sidebar ? "translate-x-0" : "max-sm:-translate-x-full"}
-      transition-all duration-300 ease-in-out z-50 overflow-y-auto`}
+      transition-all duration-300 ease-in-out z-50`}
     >
-      {/* TOP CONTENT */}
-      <div className="my-7 w-full">
+      
+      {/* TOP SECTION */}
+      <div className="pt-6 pb-3">
         <img
           src={user?.imageUrl}
           alt="User avatar"
-          className="w-13 rounded-full mx-auto"
+          className="w-12 rounded-full mx-auto"
         />
-        <h1 className="mt-1 text-center">{user?.fullName}</h1>
-
-        <div className="px-6 mt-5 text-sm text-gray-600 font-medium">
-          {navItems.map(({ to, label, Icon }) => (
-            <NavLink
-              key={to}
-              to={to}
-              end={to === "/ai"}
-              onClick={() => setSidebar(false)}
-              className={({ isActive }) =>
-                `px-3.5 py-2.5 flex items-center gap-3 rounded ${
-                  isActive
-                    ? "bg-gradient-to-r from-[#3C81F6] to-[#9234EA] text-white"
-                    : ""
-                }`
-              }
-            >
-              {({ isActive }) => (
-                <>
-                  <Icon className={`w-4 h-4 ${isActive ? "text-white" : ""}`} />
-                  {label}
-                </>
-              )}
-            </NavLink>
-          ))}
-        </div>
+        <h1 className="mt-2 text-center text-sm font-medium">
+          {user?.fullName}
+        </h1>
       </div>
 
-      {/* BOTTOM PROFILE */}
-      <div className="w-full border-t border-gray-200 p-4 px-7 flex items-center justify-between mt-auto">
+      {/* MIDDLE NAV (flex-grow to push bottom down) */}
+      <div className="flex-1 px-4 mt-4 text-sm text-gray-600 font-medium overflow-hidden">
+        {navItems.map(({ to, label, Icon }) => (
+          <NavLink
+            key={to}
+            to={to}
+            end={to === "/ai"}
+            onClick={() => setSidebar(false)}
+            className={({ isActive }) =>
+              `px-3 py-2.5 flex items-center gap-3 rounded ${
+                isActive
+                  ? "bg-gradient-to-r from-[#3C81F6] to-[#9234EA] text-white"
+                  : ""
+              }`
+            }
+          >
+            {({ isActive }) => (
+              <>
+                <Icon className={`w-4 h-4 ${isActive ? "text-white" : ""}`} />
+                {label}
+              </>
+            )}
+          </NavLink>
+        ))}
+      </div>
+
+      {/* BOTTOM SECTION (fixed at bottom, no gap) */}
+      <div className="border-t border-gray-200 p-4 flex items-center justify-between">
         <div
           onClick={openUserProfile}
           className="flex gap-2 items-center cursor-pointer"
