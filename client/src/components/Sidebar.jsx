@@ -11,51 +11,29 @@ import {
   LogOut,
   Mic,
   Sparkles,
-Code
+  Code
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
-// const navItems = [
-//   { to: "/ai", label: "Dashboard", Icon: House },
-//     { to: "/ai/roadmap-generator", label: "AI Roadmap", Icon: Sparkles },
-//       { to: "/ai/review-resume", label: "AI Review Resume", Icon: FileText },
-// { to: "/ai/tech-quiz", label: "AI Quiz Gen", Icon: Hash },
-//   { to: "/ai/write-article", label: "AI Write Article", Icon: SquarePen },
-//   { to: "/ai/blog-titles", label: "AI Blog Titles", Icon: Hash },
-//   { to: "/ai/generate-images", label: "AI Generate Images", Icon: Image },
-//   { to: "/ai/remove-background", label: "AI Remove Background", Icon: Eraser },
-//   { to: "/ai/remove-object", label: "AI Remove Object", Icon: Scissors },
-//     { to: "/ai/mock-interview", label: "AI Mock Interview", Icon: Users }, // ✅ NEW
-//   // { to: "/ai/video-interview", label: "AI Video Interview", Icon: Users },
-//   { to: "/ai/voice-interview", label: "Voice Interview", Icon: Mic }, // ✅ NEW
-//   { to: "/ai/community", label: "Community", Icon: Users },
-// ];
 const navItems = [
-  // 🔥 Core / Entry
   { to: "/ai", label: "Dashboard", Icon: House },
   { to: "/ai/roadmap-generator", label: "AI Roadmap ", Icon: Sparkles },
-  // 🎯 Interview & Career (HIGH PRIORITY)\
-   { to: "/ai/voice-interview", label: "AI Voice Interview", Icon: Mic },
+
+  { to: "/ai/voice-interview", label: "AI Voice Interview", Icon: Mic },
   { to: "/ai/mock-interview", label: "AI Chat Interview", Icon: Users },
-   { to: "/ai/tech-quiz", label: "AI Quiz", Icon: Hash },
+  { to: "/ai/tech-quiz", label: "AI Quiz", Icon: Hash },
   { to: "/ai/coding-practice", label: "AI Coding Practice", Icon: Code },
-  
+
   { to: "/ai/review-resume", label: "AI Resume Analyzer", Icon: FileText },
 
-  // 📚 Learning & Growth
-
-  // ✍️ Content Creation
   { to: "/ai/write-article", label: "AI Write Article", Icon: SquarePen },
   { to: "/ai/blog-titles", label: "AI Blog Titles", Icon: Hash },
 
-  // 🎨 AI Tools (Utilities)
   { to: "/ai/generate-images", label: "AI Generate Images", Icon: Image },
   { to: "/ai/remove-background", label: "AI Remove BGV", Icon: Eraser },
   { to: "/ai/remove-object", label: "AI Remove Object", Icon: Scissors },
 
-  // 🌐 Social / Community (LAST)
   { to: "/ai/community", label: "Community", Icon: Users },
-  
 ];
 
 const Sidebar = ({ sidebar, setSidebar }) => {
@@ -64,9 +42,10 @@ const Sidebar = ({ sidebar, setSidebar }) => {
 
   return (
     <div
-      className={`w-60 bg-white border-r border-gray-200 flex flex-col justify-between items-center max-sm:absolute top-14 bottom-0 ${
-        sidebar ? "translate-x-0" : "max-sm:-translate-x-full"
-      } transition-all duration-300 ease-in-out z-10`}
+      className={`w-60 bg-white border-r border-gray-200 flex flex-col justify-between items-center 
+      max-sm:fixed top-0 left-0 h-screen 
+      ${sidebar ? "translate-x-0" : "max-sm:-translate-x-full"} 
+      transition-all duration-300 ease-in-out z-50`}
     >
       <div className="my-7 w-full">
         <img

@@ -1,6 +1,6 @@
-// if possible lobo design 
-// Navitems for mobile screen
-//Navbar height and siderbar should be managed
+// if possible lobo design ------>done 
+// Navitems for mobile screen--->  done
+//Navbar height and siderbar should be managed  -----> done
 // All quiz submit section the score an all
 // All Ai feature possible that to be saved in dashboard 
 // Plan should be managed 
@@ -120,7 +120,7 @@ const Navbar = () => {
         onClick={() => navigate("/")}
         src={first}
         alt="logo"
-        className="w-32 sm:w-40 cursor-pointer rounded-xl"
+        className="md:w-32 w-40 sm:w-40 cursor-pointer rounded-xl"
       />
 
       {/* DESKTOP MENU */}
