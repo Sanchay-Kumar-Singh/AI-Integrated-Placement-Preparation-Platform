@@ -20,7 +20,7 @@ const Layout = () => {
           onClick={() => navigate("/")}
           src={firsts}
           alt="logo"
-          className="cursor-pointer w-32 sm:w-44"
+          className="cursor-pointer w-42 sm:w-44"
         />
         {sidebar ? (
           <X
