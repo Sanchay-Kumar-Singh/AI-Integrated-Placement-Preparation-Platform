@@ -326,19 +326,67 @@ export default function DSA() {
       `}</style>
 
       {/* ── NAVBAR (dark) ── */}
-      <nav style={{ background: '#0F172A', position: 'sticky', top: 0, zIndex: 50, borderBottom: '1px solid #1E293B' }}>
-        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 24px', height: 70, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <img onClick={() => navigate('/')} src={logo} alt="logo" style={{ height: 56, cursor: 'pointer', borderRadius: 2 }} />
-          <div style={{ display: 'flex', gap: 4 }}>
-            {NAV.map(n => (
-              <button key={n.id} onClick={() => setTab(n.id)} className="btn"
-                style={{ padding: '7px 14px', borderRadius: 8, fontSize: 16, fontWeight: 600, color: tab === n.id ? '#fff' : '#94A3B8', background: tab === n.id ? '#6366F1' : 'transparent' }}>
-                {n.icon} {n.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      </nav>
+      <nav
+  style={{
+    background: "#0F172A",
+    position: "sticky",
+    top: 0,
+    zIndex: 50,
+    borderBottom: "1px solid #1E293B",
+  }}
+>
+  <div
+    style={{
+      maxWidth: 1400,
+      margin: "0 auto",
+      padding: "10px 16px",
+      display: "flex",
+      flexWrap: "wrap",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: "12px",
+    }}
+  >
+    <img
+      onClick={() => navigate("/")}
+      src={logo}
+      alt="logo"
+      style={{
+        height: 50,
+        cursor: "pointer",
+        borderRadius: 2,
+      }}
+    />
+
+    <div
+      style={{
+        display: "flex",
+        gap: 8,
+        flexWrap: "wrap",
+        justifyContent: "center",
+      }}
+    >
+      {NAV.map((n) => (
+        <button
+          key={n.id}
+          onClick={() => setTab(n.id)}
+          className="btn"
+          style={{
+            padding: "8px 12px",
+            borderRadius: 8,
+            fontSize: 14,
+            fontWeight: 600,
+            color: tab === n.id ? "#fff" : "#94A3B8",
+            background: tab === n.id ? "#6366F1" : "transparent",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {n.icon} {n.label}
+        </button>
+      ))}
+    </div>
+  </div>
+</nav>
 
       {/* ── HERO (dark) ── */}
       <header style={{ background: '#0F172A', padding: '72px 24px 64px', position: 'relative', overflow: 'hidden' }}>

@@ -1003,19 +1003,68 @@ const DSACoding = () => {
       `}</style>
 
       {/* ── NAVBAR ── */}
-      <nav style={{ background: '#0D0D15', borderBottom: '1px solid #1E1E2E', position: 'sticky', top: 0, zIndex: 50, backdropFilter: 'blur(12px)' }}>
-        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 24px', height: 80, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <img onClick={() => navigate('/')} src={logo} alt="logo" style={{ height: 65, cursor: 'pointer', borderRadius: 4 }} />
-          <div style={{ display: 'flex', gap: 4 }}>
-            {NAV.map(n => (
-              <button key={n.id} onClick={() => setTab(n.id)} className="tab-btn"
-                style={{ padding: '6px 14px' ,borderRadius: 8, fontSize: 16, fontWeight: 600, color: tab === n.id ? '#fff' : '#666', background: tab === n.id ? '#6366F1' : 'transparent' }}>
-                {n.icon} {n.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      </nav>
+  <nav
+  style={{
+    background: "#0D0D15",
+    borderBottom: "1px solid #1E1E2E",
+    position: "sticky",
+    top: 0,
+    zIndex: 50,
+    backdropFilter: "blur(12px)",
+  }}
+>
+  <div
+    style={{
+      maxWidth: 1400,
+      margin: "0 auto",
+      padding: "10px 16px",
+      display: "flex",
+      flexWrap: "wrap",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: "12px",
+    }}
+  >
+    <img
+      onClick={() => navigate("/")}
+      src={logo}
+      alt="logo"
+      style={{
+        height: 55,
+        cursor: "pointer",
+        borderRadius: 4,
+      }}
+    />
+
+    <div
+      style={{
+        display: "flex",
+        gap: 8,
+        flexWrap: "wrap",
+        justifyContent: "center",
+      }}
+    >
+      {NAV.map((n) => (
+        <button
+          key={n.id}
+          onClick={() => setTab(n.id)}
+          className="tab-btn"
+          style={{
+            padding: "8px 12px",
+            borderRadius: 8,
+            fontSize: 14,
+            fontWeight: 600,
+            color: tab === n.id ? "#fff" : "#666",
+            background: tab === n.id ? "#6366F1" : "transparent",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {n.icon} {n.label}
+        </button>
+      ))}
+    </div>
+  </div>
+</nav>
 
       {/* ── HERO ── */}
       <header style={{ background: 'linear-gradient(135deg, #0D0D1F 0%, #111130 50%, #0D1520 100%)', padding: '80px 24px 60px', position: 'relative', overflow: 'hidden' }}>

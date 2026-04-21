@@ -1,9 +1,5 @@
-// if possible lobo design ------>done 
-// Navitems for mobile screen--->  done
-//Navbar height and siderbar should be managed  -----> done
+// create complete env for mew project 
 // All quiz submit section the score an all
-// All Ai feature possible that to be saved in dashboard 
-// Plan should be managed 
 // Best Final Look Given to Website 
 
 
