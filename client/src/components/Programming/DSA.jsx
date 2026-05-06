@@ -326,7 +326,7 @@ export default function DSA() {
       `}</style>
 
       {/* ── NAVBAR (dark) ── */}
-      <nav
+<nav
   style={{
     background: "#0F172A",
     position: "sticky",
@@ -347,6 +347,7 @@ export default function DSA() {
       gap: "12px",
     }}
   >
+    {/* LOGO (always visible) */}
     <img
       onClick={() => navigate("/")}
       src={logo}
@@ -358,7 +359,9 @@ export default function DSA() {
       }}
     />
 
+    {/* NAV ITEMS */}
     <div
+      className="navItems"
       style={{
         display: "flex",
         gap: 8,
@@ -386,6 +389,15 @@ export default function DSA() {
       ))}
     </div>
   </div>
+
+  {/* CSS */}
+  <style>{`
+    @media (max-width: 768px) {
+      .navItems {
+        display: none !important;
+      }
+    }
+  `}</style>
 </nav>
 
       {/* ── HERO (dark) ── */}

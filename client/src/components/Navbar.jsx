@@ -2,8 +2,6 @@
 // All quiz submit section the score an all
 // Best Final Look Given to Website 
 
-
-
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";

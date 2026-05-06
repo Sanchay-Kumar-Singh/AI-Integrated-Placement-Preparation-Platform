@@ -1,251 +1,93 @@
 import React, { useState } from 'react'
- import logo from '../../assets/image.png';
- import { useNavigate } from 'react-router-dom';
+import logo from '../../assets/image.png';
+import { useNavigate } from 'react-router-dom';
+import Sanchay from "../../assets/Sanchay.png";
+import prince from "../../assets/Prince.jpg";
+import SanchayResume from '../../assets/Sanchay.pdf';
+import PrinceResume from '../../assets/Prince.pdf';
+
 // ─── DATA ───────────────────────────────────────────────────────────────────
- 
+
 const resumeSections = [
-  {
-    id: 'building',
-    label: 'Building Guide',
-    icon: '🏗️',
-  },
-  {
-    id: 'tips',
-    label: 'Pro Tips',
-    icon: '💡',
-  },
-  {
-    id: 'mistakes',
-    label: 'Mistakes to Avoid',
-    icon: '🚫',
-  },
-  {
-    id: 'ats',
-    label: 'ATS Guide',
-    icon: '🤖',
-  },
-  {
-    id: 'templates',
-    label: 'Templates',
-    icon: '📄',
-  },
-  {
-    id: 'platforms',
-    label: 'Best Platforms',
-    icon: '🌐',
-  },
+  { id: 'building', label: 'Building Guide', icon: '🏗️' },
+  { id: 'tips', label: 'Pro Tips', icon: '💡' },
+  { id: 'mistakes', label: 'Mistakes to Avoid', icon: '🚫' },
+  { id: 'ats', label: 'ATS Guide', icon: '🤖' },
+  { id: 'templates', label: 'Templates', icon: '📄' },
+  { id: 'platforms', label: 'Best Platforms', icon: '🌐' },
 ]
- 
+
 const buildingGuide = [
   {
-    step: '01',
-    title: 'Contact Information',
-    icon: '👤',
-    color: '#3B82F6',
+    step: '01', title: 'Contact Information', icon: '👤', color: '#1a56db',
     must: ['Full Name (large, prominent)', 'Professional Email (gmail/outlook)', 'Phone Number with country code', 'LinkedIn Profile URL', 'GitHub Profile (for tech roles)', 'Portfolio Website / Behance'],
     avoid: ['Home address (optional in 2024)', 'Personal photo (for US/UK jobs)', 'Age or Date of Birth', 'Unprofessional email (e.g. coolguy123@)'],
     tip: 'Make your name the largest text on the page. Your email should be firstname.lastname@gmail.com ideally.',
   },
   {
-    step: '02',
-    title: 'Professional Summary',
-    icon: '📋',
-    color: '#8B5CF6',
+    step: '02', title: 'Professional Summary', icon: '📋', color: '#6d28d9',
     must: ['2–3 lines max', 'Mention years of experience', 'Top 2–3 skills relevant to role', 'What value you bring', 'Tailored per job application'],
     avoid: ['Generic phrases like "hardworking team player"', 'Objective statements (outdated)', 'More than 4 lines', 'First-person pronouns (I, me, my)'],
     tip: '"Results-driven software engineer with 3+ years of experience building scalable web apps using React and Node.js, reducing load times by 40%."',
   },
   {
-    step: '03',
-    title: 'Work Experience',
-    icon: '💼',
-    color: '#10B981',
+    step: '03', title: 'Work Experience', icon: '💼', color: '#065f46',
     must: ['Company Name + Location', 'Job Title + Employment Type', 'Start – End Date (Month Year)', '3–5 bullet points per role', 'Action verbs to start each bullet', 'Quantified achievements (numbers!)'],
     avoid: ['Job duties (what you did) — write impact instead', 'Paragraphs instead of bullets', 'Vague bullets: "worked on team projects"', 'Listing every job — curate relevance'],
     tip: 'Use the formula: "Action Verb + What you did + Result/Impact" — "Reduced API response time by 60% by implementing Redis caching."',
   },
   {
-    step: '04',
-    title: 'Education',
-    icon: '🎓',
-    color: '#F59E0B',
+    step: '04', title: 'Education', icon: '🎓', color: '#92400e',
     must: ['Degree + Major', 'University Name', 'Graduation Year', 'CGPA (if 7.5+ or 3.5+)', 'Relevant Coursework (optional for freshers)', 'Honors/Awards if any'],
     avoid: ['High school details (if you have a degree)', 'CGPA if below 7.0', 'Semester-wise grades', 'Irrelevant coursework'],
     tip: 'For freshers: Education comes before Work Experience. For experienced: Put it after.',
   },
   {
-    step: '05',
-    title: 'Skills Section',
-    icon: '⚙️',
-    color: '#EF4444',
+    step: '05', title: 'Skills Section', icon: '⚙️', color: '#991b1b',
     must: ['Technical Skills (Languages, Frameworks, Tools)', 'Group by category', 'Only skills you can speak about in interview', 'Proficiency levels (optional but useful)', 'Soft skills very briefly or skip'],
-    avoid: ['Microsoft Word / PowerPoint (too basic)', 'Skills you\'re not confident in', 'Skill bars / ratings (meaningless)', 'Listing 30+ skills'],
+    avoid: ['Microsoft Word / PowerPoint (too basic)', "Skills you're not confident in", 'Skill bars / ratings (meaningless)', 'Listing 30+ skills'],
     tip: 'Group like: Languages: Python, Java | Frameworks: React, Django | Tools: Git, Docker | Cloud: AWS, GCP',
   },
   {
-    step: '06',
-    title: 'Projects',
-    icon: '🚀',
-    color: '#06B6D4',
+    step: '06', title: 'Projects', icon: '🚀', color: '#0e7490',
     must: ['Project Name + Tech Stack used', 'Live URL or GitHub link', '2–3 bullets: problem, solution, impact', 'Most impressive projects first', 'Mention scale (users, data size, etc.)'],
     avoid: ['Academic projects with no real impact', 'Projects with no GitHub link', 'Listing too many minor projects', 'Copying tutorial projects without modification'],
     tip: '"Built a real-time chat app using Socket.io and React with 500+ daily users and 99.9% uptime on AWS EC2."',
   },
   {
-    step: '07',
-    title: 'Certifications & Awards',
-    icon: '🏆',
-    color: '#8B5CF6',
+    step: '07', title: 'Certifications & Awards', icon: '🏆', color: '#5b21b6',
     must: ['Certification Name', 'Issuing Organization', 'Year / Validity', 'Credential ID or URL (optional)', 'Only relevant certifications'],
     avoid: ['Expired or outdated certifications', 'Too many unrelated ones', 'Basic course completions from YouTube', 'Faking certifications'],
     tip: 'Top valued certs in tech: AWS, Google Cloud, Meta React, Microsoft Azure, Coursera (top university courses)',
   },
 ]
- 
+
 const proTips = [
-  {
-    icon: '📏',
-    title: 'Keep It 1 Page',
-    desc: 'For 0–5 years of experience, stick to exactly 1 page. Recruiters spend only 6–7 seconds on a resume. Every word must earn its place.',
-    tag: 'Format',
-    color: '#3B82F6',
-  },
-  {
-    icon: '🎯',
-    title: 'Tailor for Every Job',
-    desc: 'Never send the same resume to 100 jobs. Read the JD, match keywords, rearrange bullet points. A tailored resume has 3x higher callback rate.',
-    tag: 'Strategy',
-    color: '#10B981',
-  },
-  {
-    icon: '📊',
-    title: 'Quantify Everything',
-    desc: '"Improved performance" is weak. "Improved API response time by 45%, serving 2M+ requests/day" is powerful. Numbers = credibility.',
-    tag: 'Content',
-    color: '#F59E0B',
-  },
-  {
-    icon: '🔤',
-    title: 'Use Strong Action Verbs',
-    desc: 'Start every bullet with: Built, Designed, Engineered, Optimized, Led, Reduced, Increased, Architected, Deployed, Automated.',
-    tag: 'Language',
-    color: '#8B5CF6',
-  },
-  {
-    icon: '🤫',
-    title: 'White Space is Your Friend',
-    desc: 'A cluttered resume gets skipped. Use consistent margins (0.5–1 inch), clean fonts (Calibri, Garamond, Georgia), and good line spacing.',
-    tag: 'Design',
-    color: '#EF4444',
-  },
-  {
-    icon: '🔗',
-    title: 'Hyperlink Everything',
-    desc: 'Make LinkedIn, GitHub, and portfolio links clickable. Recruiters reading on screen should be one click away from your work.',
-    tag: 'Tech',
-    color: '#06B6D4',
-  },
-  {
-    icon: '🧪',
-    title: 'Test with Job Scanner',
-    desc: 'Use Jobscan or Resume Worded to score your resume against a specific JD. Aim for 70%+ match score before applying.',
-    tag: 'ATS',
-    color: '#10B981',
-  },
-  {
-    icon: '📤',
-    title: 'Always Submit as PDF',
-    desc: 'PDF preserves formatting across all devices and operating systems. Word docs (.docx) can look broken on different platforms.',
-    tag: 'Format',
-    color: '#F59E0B',
-  },
+  { icon: '📏', title: 'Keep It 1 Page', desc: 'For 0–5 years of experience, stick to exactly 1 page. Recruiters spend only 6–7 seconds on a resume. Every word must earn its place.', tag: 'Format', color: '#1a56db' },
+  { icon: '🎯', title: 'Tailor for Every Job', desc: 'Never send the same resume to 100 jobs. Read the JD, match keywords, rearrange bullet points. A tailored resume has 3x higher callback rate.', tag: 'Strategy', color: '#065f46' },
+  { icon: '📊', title: 'Quantify Everything', desc: '"Improved performance" is weak. "Improved API response time by 45%, serving 2M+ requests/day" is powerful. Numbers = credibility.', tag: 'Content', color: '#92400e' },
+  { icon: '🔤', title: 'Use Strong Action Verbs', desc: 'Start every bullet with: Built, Designed, Engineered, Optimized, Led, Reduced, Increased, Architected, Deployed, Automated.', tag: 'Language', color: '#6d28d9' },
+  { icon: '🤫', title: 'White Space is Your Friend', desc: 'A cluttered resume gets skipped. Use consistent margins (0.5–1 inch), clean fonts (Calibri, Garamond, Georgia), and good line spacing.', tag: 'Design', color: '#991b1b' },
+  { icon: '🔗', title: 'Hyperlink Everything', desc: 'Make LinkedIn, GitHub, and portfolio links clickable. Recruiters reading on screen should be one click away from your work.', tag: 'Tech', color: '#0e7490' },
+  { icon: '🧪', title: 'Test with Job Scanner', desc: 'Use Jobscan or Resume Worded to score your resume against a specific JD. Aim for 70%+ match score before applying.', tag: 'ATS', color: '#065f46' },
+  { icon: '📤', title: 'Always Submit as PDF', desc: 'PDF preserves formatting across all devices and operating systems. Word docs (.docx) can look broken on different platforms.', tag: 'Format', color: '#92400e' },
 ]
- 
+
 const mistakes = [
-  {
-    icon: '❌',
-    title: 'Using a Generic Objective Statement',
-    desc: '"To obtain a position in a reputed organization..." — This tells recruiters nothing. Replace with a punchy 2-line Professional Summary.',
-    severity: 'Critical',
-    fix: 'Write a tailored 2–3 line summary with your top skills and years of experience.',
-    sevColor: 'bg-red-100 text-red-700',
-  },
-  {
-    icon: '❌',
-    title: 'Spelling & Grammar Errors',
-    desc: 'A single typo can get your resume rejected instantly. It signals lack of attention to detail — a dealbreaker for any professional role.',
-    severity: 'Critical',
-    fix: 'Use Grammarly Premium or Hemingway App. Read backwards sentence by sentence.',
-    sevColor: 'bg-red-100 text-red-700',
-  },
-  {
-    icon: '❌',
-    title: 'No Quantified Achievements',
-    desc: '"Worked on backend team." → This adds zero value. Every bullet must show impact through numbers, scale, or outcomes.',
-    severity: 'Critical',
-    fix: 'Add metrics: team size, users served, % improvement, time saved, money saved.',
-    sevColor: 'bg-red-100 text-red-700',
-  },
-  {
-    icon: '⚠️',
-    title: 'Using Fancy Templates with Tables/Columns',
-    desc: 'Two-column or heavily designed resumes look great to humans but ATS systems read them as garbled text — your resume may score 0%.',
-    severity: 'High',
-    fix: 'Use clean single-column, ATS-friendly templates. Simple > Fancy for job applications.',
-    sevColor: 'bg-orange-100 text-orange-700',
-  },
-  {
-    icon: '⚠️',
-    title: 'Including a Photo',
-    desc: 'In US, UK, Canada, and Australia — adding a photo is highly discouraged. It introduces bias and can lead to automatic rejection.',
-    severity: 'High',
-    fix: 'Only include photo for European countries (Germany, France) where it\'s expected.',
-    sevColor: 'bg-orange-100 text-orange-700',
-  },
-  {
-    icon: '⚠️',
-    title: 'Listing Job Duties Instead of Achievements',
-    desc: '"Responsible for managing database" is a job description. "Optimized database queries, reducing load time by 70%" is an achievement.',
-    severity: 'High',
-    fix: 'Ask yourself: "What changed because I was there?" That\'s your bullet point.',
-    sevColor: 'bg-orange-100 text-orange-700',
-  },
-  {
-    icon: '⚠️',
-    title: 'Outdated Contact Information',
-    desc: 'Wrong phone number or old email = missed opportunity. Always verify your contact details before submitting.',
-    severity: 'High',
-    fix: 'Do a final check: dial your own number, send a test email to yourself.',
-    sevColor: 'bg-orange-100 text-orange-700',
-  },
-  {
-    icon: '💡',
-    title: 'Too Long (3+ Pages for Junior Roles)',
-    desc: 'More pages ≠ more impressive. For 0–5 years experience, 1 page is the gold standard. Even 10-year veterans can do 2 pages.',
-    severity: 'Medium',
-    fix: 'Cut filler, remove old irrelevant experience, shorten bullets to 1 line each.',
-    sevColor: 'bg-yellow-100 text-yellow-700',
-  },
-  {
-    icon: '💡',
-    title: 'Missing GitHub / Portfolio Links',
-    desc: 'For tech roles, not having a GitHub link is a massive missed opportunity. Recruiters actively look for code samples.',
-    severity: 'Medium',
-    fix: 'Create a clean GitHub with pinned repos + README files. Link it prominently.',
-    sevColor: 'bg-yellow-100 text-yellow-700',
-  },
-  {
-    icon: '💡',
-    title: 'Sending the Same Resume Everywhere',
-    desc: 'Mass applying with one resume is lazy and ineffective. Personalize the summary and top skills for each role/company.',
-    severity: 'Medium',
-    fix: 'Keep a master resume. Clone and customize for each application in 10 minutes.',
-    sevColor: 'bg-yellow-100 text-yellow-700',
-  },
+  { icon: '❌', title: 'Using a Generic Objective Statement', desc: '"To obtain a position in a reputed organization..." — This tells recruiters nothing. Replace with a punchy 2-line Professional Summary.', severity: 'Critical', fix: 'Write a tailored 2–3 line summary with your top skills and years of experience.', sevColor: 'sev-critical' },
+  { icon: '❌', title: 'Spelling & Grammar Errors', desc: 'A single typo can get your resume rejected instantly. It signals lack of attention to detail — a dealbreaker for any professional role.', severity: 'Critical', fix: 'Use Grammarly Premium or Hemingway App. Read backwards sentence by sentence.', sevColor: 'sev-critical' },
+  { icon: '❌', title: 'No Quantified Achievements', desc: '"Worked on backend team." → This adds zero value. Every bullet must show impact through numbers, scale, or outcomes.', severity: 'Critical', fix: 'Add metrics: team size, users served, % improvement, time saved, money saved.', sevColor: 'sev-critical' },
+  { icon: '⚠️', title: 'Using Fancy Templates with Tables/Columns', desc: 'Two-column or heavily designed resumes look great to humans but ATS systems read them as garbled text — your resume may score 0%.', severity: 'High', fix: 'Use clean single-column, ATS-friendly templates. Simple > Fancy for job applications.', sevColor: 'sev-high' },
+  { icon: '⚠️', title: 'Including a Photo', desc: "In US, UK, Canada, and Australia — adding a photo is highly discouraged. It introduces bias and can lead to automatic rejection.", severity: 'High', fix: "Only include photo for European countries (Germany, France) where it's expected.", sevColor: 'sev-high' },
+  { icon: '⚠️', title: 'Listing Job Duties Instead of Achievements', desc: '"Responsible for managing database" is a job description. "Optimized database queries, reducing load time by 70%" is an achievement.', severity: 'High', fix: 'Ask yourself: "What changed because I was there?" That\'s your bullet point.', sevColor: 'sev-high' },
+  { icon: '⚠️', title: 'Outdated Contact Information', desc: 'Wrong phone number or old email = missed opportunity. Always verify your contact details before submitting.', severity: 'High', fix: 'Do a final check: dial your own number, send a test email to yourself.', sevColor: 'sev-high' },
+  { icon: '💡', title: 'Too Long (3+ Pages for Junior Roles)', desc: 'More pages ≠ more impressive. For 0–5 years experience, 1 page is the gold standard. Even 10-year veterans can do 2 pages.', severity: 'Medium', fix: 'Cut filler, remove old irrelevant experience, shorten bullets to 1 line each.', sevColor: 'sev-medium' },
+  { icon: '💡', title: 'Missing GitHub / Portfolio Links', desc: 'For tech roles, not having a GitHub link is a massive missed opportunity. Recruiters actively look for code samples.', severity: 'Medium', fix: 'Create a clean GitHub with pinned repos + README files. Link it prominently.', sevColor: 'sev-medium' },
+  { icon: '💡', title: 'Sending the Same Resume Everywhere', desc: 'Mass applying with one resume is lazy and ineffective. Personalize the summary and top skills for each role/company.', severity: 'Medium', fix: 'Keep a master resume. Clone and customize for each application in 10 minutes.', sevColor: 'sev-medium' },
 ]
- 
+
 const atsGuide = {
-  what: 'ATS (Applicant Tracking System) is software used by 98% of Fortune 500 companies to automatically scan, parse, and rank resumes before a human ever sees them. If your resume isn\'t ATS-optimized, it gets rejected automatically — no matter how qualified you are.',
+  what: "ATS (Applicant Tracking System) is software used by 98% of Fortune 500 companies to automatically scan, parse, and rank resumes before a human ever sees them. If your resume isn't ATS-optimized, it gets rejected automatically — no matter how qualified you are.",
   stats: [
     { value: '98%', label: 'Fortune 500 use ATS' },
     { value: '75%', label: 'Resumes rejected by ATS' },
@@ -270,641 +112,1232 @@ const atsGuide = {
     'No skill rating bars or charts',
     'No abbreviations without spelling them out first',
     'No creative section names like "My Journey" or "Superpowers"',
-    'Don\'t stuff keywords unnaturally',
+    "Don't stuff keywords unnaturally",
   ],
   tools: [
-    { name: 'Jobscan', desc: 'Compare resume vs JD — gives a match % score', url: 'https://www.jobscan.co', color: '#3B82F6' },
-    { name: 'Resume Worded', desc: 'AI-powered score with detailed improvement suggestions', url: 'https://resumeworded.com', color: '#10B981' },
-    { name: 'SkillSyncer', desc: 'Free keyword matching tool for ATS optimization', url: 'https://skillsyncer.com', color: '#8B5CF6' },
+    { name: 'Jobscan', desc: 'Compare resume vs JD — gives a match % score', url: 'https://www.jobscan.co', color: '#1a56db' },
+    { name: 'Resume Worded', desc: 'AI-powered score with detailed improvement suggestions', url: 'https://resumeworded.com', color: '#065f46' },
+    { name: 'SkillSyncer', desc: 'Free keyword matching tool for ATS optimization', url: 'https://skillsyncer.com', color: '#6d28d9' },
   ],
 }
- 
+
 const templates = [
   {
-    name: 'Jake\'s Resume',
-    source: 'Overleaf (LaTeX)',
-    icon: '🔬',
-    color: '#047857',
-    tag: 'Most Popular for SWE',
-    tagColor: 'bg-emerald-600',
-    desc: 'The gold standard for software engineering resumes. Used by FAANG employees. Clean, ATS-friendly single-column LaTeX template. Widely recommended on r/cscareerquestions.',
-    features: ['Single column — 100% ATS safe', 'LaTeX formatting = pixel-perfect', 'Clean typography', 'Easy to customize sections', 'Free on Overleaf'],
+    name: "Jake's Resume", source: 'Overleaf (LaTeX)', icon: '🔬', color: '#065f46',
+    tag: 'Most Popular for SWE', tagColor: '#065f46',
+    desc: "The gold standard for software engineering resumes. Used by FAANG employees. Clean, ATS-friendly single-column LaTeX template.",
+    features: ['Single column — 100% ATS safe', 'LaTeX formatting = pixel-perfect', 'Clean typography', 'Easy to customize', 'Free on Overleaf'],
     url: 'https://www.overleaf.com/latex/templates/jakes-resume/syzfjbzwjncs',
     forWho: 'Software Engineers, CS Students, FAANG applicants',
   },
   {
-    name: 'Deedy Resume',
-    source: 'Overleaf (LaTeX)',
-    icon: '⚡',
-    color: '#1d4ed8',
-    tag: 'Two-Column Classic',
-    tagColor: 'bg-blue-600',
-    desc: 'Created by a Google engineer, Deedy is a beautiful two-column LaTeX resume. Note: two-column may have ATS issues — best for human review / printed portfolios.',
-    features: ['Two-column layout', 'Strong visual hierarchy', 'Great for print/PDF portfolio', 'Compact but information-rich', 'Free on Overleaf'],
+    name: 'Deedy Resume', source: 'Overleaf (LaTeX)', icon: '⚡', color: '#1a56db',
+    tag: 'Two-Column Classic', tagColor: '#1a56db',
+    desc: 'Created by a Google engineer. Beautiful two-column LaTeX resume. Best for human review / printed portfolios.',
+    features: ['Two-column layout', 'Strong visual hierarchy', 'Great for print/PDF', 'Information-rich', 'Free on Overleaf'],
     url: 'https://www.overleaf.com/latex/templates/deedy-resume/bjryvfsjdyxz',
     forWho: 'Experienced engineers, design-conscious applicants',
   },
   {
-    name: 'Resumake',
-    source: 'resumake.io',
-    icon: '🎯',
-    color: '#7c3aed',
-    tag: 'Best Free Online Tool',
-    tagColor: 'bg-violet-600',
-    desc: 'Open-source online resume builder. Enter your details and export clean LaTeX-style PDF in seconds. No account needed. Simple and effective.',
-    features: ['No signup required', 'Multiple clean themes', 'Export to PDF/LaTeX', 'GitHub-friendly JSON format', 'Completely free'],
+    name: 'Resumake', source: 'resumake.io', icon: '🎯', color: '#6d28d9',
+    tag: 'Best Free Online Tool', tagColor: '#6d28d9',
+    desc: 'Open-source online resume builder. Enter details and export clean LaTeX-style PDF in seconds. No account needed.',
+    features: ['No signup required', 'Multiple clean themes', 'Export to PDF/LaTeX', 'GitHub-friendly JSON', 'Completely free'],
     url: 'https://resumake.io',
     forWho: 'Students, developers who want quick clean resume',
   },
   {
-    name: 'Resume.io SWE Template',
-    source: 'Resume.io',
-    icon: '💼',
-    color: '#0369a1',
-    tag: 'Best for Non-Designers',
-    tagColor: 'bg-sky-600',
-    desc: 'Professional ready-to-use templates with drag-and-drop editing. The software engineer template is ATS-optimized and looks clean for both technical and non-technical reviewers.',
-    features: ['Drag-and-drop editor', 'ATS-optimized templates', 'AI content suggestions', 'Real-time PDF preview', 'Multiple download formats'],
+    name: 'Resume.io SWE Template', source: 'Resume.io', icon: '💼', color: '#0e7490',
+    tag: 'Best for Non-Designers', tagColor: '#0e7490',
+    desc: 'Professional ready-to-use templates with drag-and-drop editing. ATS-optimized for both technical and non-technical reviewers.',
+    features: ['Drag-and-drop editor', 'ATS-optimized', 'AI content suggestions', 'Real-time preview', 'Multiple formats'],
     url: 'https://resume.io',
     forWho: 'Non-designers, quick professional resume needed',
   },
   {
-    name: 'Canva Resume',
-    source: 'Canva',
-    icon: '🎨',
-    color: '#7D2AE8',
-    tag: 'Most Visual',
-    tagColor: 'bg-purple-600',
-    desc: 'Beautiful visually-rich templates. WARNING: Canva resumes are NOT ATS-friendly. Use only for creative roles (UI/UX, Design, Marketing) — never for bulk applications.',
-    features: ['Drag-and-drop design', 'Beautiful visual templates', 'Great for creative portfolios', 'Easy sharing & collaboration', 'Free tier available'],
+    name: 'Canva Resume', source: 'Canva', icon: '🎨', color: '#7D2AE8',
+    tag: 'Most Visual', tagColor: '#7D2AE8',
+    desc: '⚠️ Beautiful visually-rich templates. NOT ATS-friendly. Use only for creative roles (UI/UX, Design, Marketing).',
+    features: ['Drag-and-drop design', 'Beautiful templates', 'Creative portfolios', 'Easy sharing', 'Free tier available'],
     url: 'https://www.canva.com/resumes',
-    forWho: '⚠️ Designers, Creatives ONLY — NOT for software/tech ATS applications',
+    forWho: '⚠️ Designers & Creatives ONLY — NOT for software/tech ATS applications',
   },
 ]
- 
+
 const platforms = [
-  {
-    name: 'Kickresume',
-    icon: '🚀',
-    desc: 'AI-powered resume builder with 35+ ATS-friendly templates, AI bullet point generator, and LinkedIn import. Best for professionals and students.',
-    tags: ['AI Writing', 'ATS Friendly', 'LinkedIn Import'],
-    color: '#3B82F6',
-    free: true,
-    url: 'https://www.kickresume.com',
-    rating: 4.8,
-  },
-  {
-    name: 'Zety',
-    icon: '⚡',
-    desc: 'Smart resume builder with pre-written content suggestions for every job title. Intuitive interface with real-time content score meter.',
-    tags: ['Content Suggestions', 'Score Meter', 'Cover Letter'],
-    color: '#10B981',
-    free: false,
-    url: 'https://zety.com',
-    rating: 4.7,
-  },
-  {
-    name: 'Novoresume',
-    icon: '✨',
-    desc: 'Elegant minimalist templates trusted by 4M+ job seekers. Excellent ATS-optimized layouts with a built-in content analyzer.',
-    tags: ['Minimalist', 'ATS Score', 'Content Analyzer'],
-    color: '#8B5CF6',
-    free: true,
-    url: 'https://novoresume.com',
-    rating: 4.6,
-  },
-  {
-    name: 'Enhancv',
-    icon: '🎯',
-    desc: 'Unique infographic-style resumes with a focus on personality and story. Great for standing out — especially in startup and product roles.',
-    tags: ['Infographic Style', 'Personal Branding', 'Story-Driven'],
-    color: '#F59E0B',
-    free: false,
-    url: 'https://enhancv.com',
-    rating: 4.5,
-  },
-  {
-    name: 'Resume.io',
-    icon: '💼',
-    desc: 'Clean, professional templates with AI writing assistant. Most popular for corporate and tech job applications. Trusted by 10M+ users.',
-    tags: ['AI Assistant', 'Corporate Style', 'PDF Export'],
-    color: '#EF4444',
-    free: false,
-    url: 'https://resume.io',
-    rating: 4.7,
-  },
+  { name: 'Kickresume', icon: '🚀', desc: 'AI-powered resume builder with 35+ ATS-friendly templates, AI bullet point generator, and LinkedIn import.', tags: ['AI Writing', 'ATS Friendly', 'LinkedIn Import'], color: '#1a56db', free: true, url: 'https://www.kickresume.com', rating: 4.8 },
+  { name: 'Zety', icon: '⚡', desc: 'Smart resume builder with pre-written content suggestions for every job title. Intuitive interface with real-time content score meter.', tags: ['Content Suggestions', 'Score Meter', 'Cover Letter'], color: '#065f46', free: false, url: 'https://zety.com', rating: 4.7 },
+  { name: 'Novoresume', icon: '✨', desc: 'Elegant minimalist templates trusted by 4M+ job seekers. Excellent ATS-optimized layouts with a built-in content analyzer.', tags: ['Minimalist', 'ATS Score', 'Content Analyzer'], color: '#6d28d9', free: true, url: 'https://novoresume.com', rating: 4.6 },
+  { name: 'Enhancv', icon: '🎯', desc: 'Unique infographic-style resumes with a focus on personality and story. Great for standing out in startup and product roles.', tags: ['Infographic Style', 'Personal Branding', 'Story-Driven'], color: '#92400e', free: false, url: 'https://enhancv.com', rating: 4.5 },
+  { name: 'Resume.io', icon: '💼', desc: 'Clean, professional templates with AI writing assistant. Most popular for corporate and tech job applications. Trusted by 10M+ users.', tags: ['AI Assistant', 'Corporate Style', 'PDF Export'], color: '#991b1b', free: false, url: 'https://resume.io', rating: 4.7 },
 ]
- 
+
 const actionVerbs = {
-  Built: '#3B82F6', Designed: '#8B5CF6', Engineered: '#10B981', Optimized: '#F59E0B',
-  Led: '#EF4444', Reduced: '#06B6D4', Increased: '#10B981', Architected: '#8B5CF6',
-  Deployed: '#3B82F6', Automated: '#F59E0B', Developed: '#10B981', Implemented: '#EF4444',
-  Improved: '#06B6D4', Delivered: '#F59E0B', Managed: '#8B5CF6', Created: '#3B82F6',
-  Integrated: '#10B981', Launched: '#EF4444', Scaled: '#06B6D4', Mentored: '#8B5CF6',
+  Built: '#1a56db', Designed: '#6d28d9', Engineered: '#065f46', Optimized: '#92400e',
+  Led: '#991b1b', Reduced: '#0e7490', Increased: '#065f46', Architected: '#6d28d9',
+  Deployed: '#1a56db', Automated: '#92400e', Developed: '#065f46', Implemented: '#991b1b',
+  Improved: '#0e7490', Delivered: '#92400e', Managed: '#6d28d9', Created: '#1a56db',
+  Integrated: '#065f46', Launched: '#991b1b', Scaled: '#0e7490', Mentored: '#6d28d9',
 }
- 
-// ─── COMPONENT ───────────────────────────────────────────────────────────────
- 
+
+const teamMembers = [
+  {
+    name: 'Sanchay Kumar Singh',
+    role: 'Co-Founder & Java + Full Stack Developer',
+    initials: 'SK',
+    color: '#1a56db',
+    photo: Sanchay,
+    bio: 'Full-stack developer with expertise in building career tools and web platforms.',
+    resumeLabel: 'View Resume (PDF)',
+    resumeUrl: SanchayResume,   // ✅ FIXED
+  },
+  {
+    name: 'Prince Kumar Sinha',
+    role: 'Co-Founder & C++ + Full Stack Designer',
+    initials: 'PK',
+    color: '#065f46',
+    photo: prince,
+    bio: 'UI/UX designer and developer focused on creating intuitive job-seeker experiences.',
+    resumeLabel: 'View Resume (PDF)',
+    resumeUrl: PrinceResume,   // ✅ FIXED
+  },
+];
+// ─── STYLES ──────────────────────────────────────────────────────────────────
+
+const styles = `
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body { font-family: 'Source Sans 3', sans-serif; }
+
+  .resume-root {
+    min-height: 100vh;
+    background: #f8f7f4;
+    font-family: 'Source Sans 3', sans-serif;
+    color: #1c1917;
+  }
+
+  /* NAVBAR */
+  .r-nav {
+    background: #fff;
+    border-bottom: 2px solid #e7e4dd;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .r-nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .r-nav-logo { display: flex; align-items: center; gap: 0.75rem; cursor: pointer; }
+  .r-nav-logo img { height: 40px; border-radius: 8px; }
+  .r-nav-links { display: flex; gap: 2rem; }
+  .r-nav-links button {
+    background: none; border: none; cursor: pointer;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.875rem; font-weight: 600;
+    color: #57534e; letter-spacing: 0.025em;
+    text-transform: uppercase; transition: color 0.2s;
+    padding: 0.25rem 0;
+    border-bottom: 2px solid transparent;
+  }
+  .r-nav-links button:hover { color: #1a56db; }
+  .r-nav-links button.active { color: #1a56db; border-bottom-color: #1a56db; }
+
+  /* HERO */
+  .r-hero {
+  background: radial-gradient(circle at center, #065f46 0%, #052e2b 80%);  /* Tailwind slate-900 vibe */
+    padding: 5rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .r-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,0.015) 0px,
+      rgba(255,255,255,0.015) 1px,
+      transparent 1px,
+      transparent 60px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.015) 0px,
+      rgba(255,255,255,0.015) 1px,
+      transparent 1px,
+      transparent 60px
+    );
+  }
+  .r-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 80px;
+    background: linear-gradient(to top, #f8f7f4, transparent);
+  }
+  .r-hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .r-hero-badge {
+    display: inline-block;
+    background: rgba(26,86,219,0.15);
+    border: 1px solid rgba(26,86,219,0.3);
+    color: #93c5fd;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.4rem 1.2rem;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+  }
+  .r-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    color: #f9fafb;
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+  .r-hero h1 span {
+    background: linear-gradient(135deg, #60a5fa, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .r-hero-sub {
+    color: #9ca3af;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    font-weight: 300;
+  }
+  .r-hero-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    max-width: 700px;
+    margin: 0 auto 2.5rem;
+  }
+  @media (max-width: 640px) { .r-hero-stats { grid-template-columns: repeat(2, 1fr); } }
+  .r-stat-box {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 1rem 0.75rem;
+    text-align: center;
+  }
+  .r-stat-val { font-family: 'Playfair Display', serif; font-size: 1.75rem; font-weight: 700; color: #60a5fa; }
+  .r-stat-lbl { font-size: 0.75rem; color: #6b7280; margin-top: 0.25rem; font-weight: 400; }
+
+  /* TAB PILLS IN HERO */
+  .r-hero-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+  .r-pill {
+    padding: 0.5rem 1.1rem;
+    border-radius: 2px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.07);
+    color: #d1d5db;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .r-pill:hover { background: rgba(255,255,255,0.12); }
+  .r-pill.active { background: #1a56db; border-color: #1a56db; color: #fff; }
+
+  /* SECTION TABS BAR */
+  .r-tabs-bar {
+    background: #fff;
+    border-bottom: 2px solid #e7e4dd;
+    position: sticky;
+    top: 64px;
+    z-index: 40;
+  }
+  .r-tabs-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    gap: 0.25rem;
+    overflow-x: auto;
+  }
+  .r-tab-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.9rem 1.25rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: #78716c;
+    transition: all 0.2s;
+  }
+  .r-tab-btn:hover { color: #1c1917; border-bottom-color: #d6d3d1; }
+  .r-tab-btn.active { color: #1a56db; border-bottom-color: #1a56db; }
+
+  /* CONTENT AREA */
+  .r-content { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+
+  /* SECTION HEADER */
+  .r-section-header { text-align: center; margin-bottom: 3rem; }
+  .r-section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+  }
+  .r-section-header p {
+    color: #78716c;
+    font-size: 1.05rem;
+    max-width: 500px;
+    margin: 0 auto;
+    font-weight: 300;
+  }
+  .r-divider {
+    width: 48px; height: 3px;
+    background: #1a56db;
+    margin: 1rem auto 0;
+  }
+
+  /* ACCORDION CARDS */
+  .r-accordion { display: flex; flex-direction: column; gap: 0.75rem; }
+  .r-acc-card {
+    background: #fff;
+    border: 1.5px solid #e7e4dd;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.25s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .r-acc-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+  .r-acc-card.open { border-color: #1a56db; box-shadow: 0 4px 20px rgba(26,86,219,0.1); }
+  .r-acc-btn {
+    width: 100%; display: flex; align-items: center;
+    gap: 1rem; padding: 1.25rem 1.5rem;
+    text-align: left; background: none; border: none;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .r-acc-btn:hover { background: #fafaf8; }
+  .r-step-badge {
+    width: 44px; height: 44px;
+    border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 1.25rem;
+    color: #fff;
+  }
+  .r-acc-meta { flex: 1; }
+  .r-acc-num {
+    font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.15em; color: #9ca3af;
+    text-transform: uppercase; margin-bottom: 0.2rem;
+  }
+  .r-acc-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700;
+    color: #111827;
+  }
+  .r-chevron { color: #9ca3af; font-size: 0.8rem; transition: transform 0.3s; }
+  .r-chevron.open { transform: rotate(180deg); }
+
+  /* ACCORDION BODY */
+  .r-acc-body { padding: 0 1.5rem 1.5rem; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+  @media (max-width: 900px) { .r-acc-body { grid-template-columns: 1fr; } }
+  .r-acc-panel { border-radius: 4px; padding: 1.25rem; }
+  .r-acc-panel.must { background: #f0fdf4; border: 1px solid #bbf7d0; }
+  .r-acc-panel.avoid { background: #fef2f2; border: 1px solid #fecaca; }
+  .r-acc-panel.tip { background: #111827; }
+  .r-acc-panel-label {
+    font-size: 0.65rem; font-weight: 800;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .r-acc-panel.must .r-acc-panel-label { color: #15803d; }
+  .r-acc-panel.avoid .r-acc-panel-label { color: #b91c1c; }
+  .r-acc-panel.tip .r-acc-panel-label { color: #fbbf24; }
+  .r-panel-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .r-panel-list li { display: flex; gap: 0.5rem; font-size: 0.875rem; color: #374151; align-items: flex-start; }
+  .r-panel-list li span { flex-shrink: 0; margin-top: 2px; }
+  .r-tip-text { font-size: 0.875rem; color: #d1d5db; line-height: 1.65; font-style: italic; font-weight: 300; }
+
+  /* ACTION VERBS */
+  .r-verbs-box {
+    margin-top: 3rem;
+    background: #fff;
+    border: 1.5px solid #e7e4dd;
+    border-radius: 4px;
+    padding: 2rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .r-verbs-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700; color: #111827;
+    margin-bottom: 0.4rem;
+  }
+  .r-verbs-box p { color: #78716c; font-size: 0.875rem; margin-bottom: 1.25rem; }
+  .r-verbs-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .r-verb {
+    padding: 0.4rem 1rem;
+    border-radius: 2px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.03em;
+  }
+
+  /* PRO TIPS GRID */
+  .r-tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; margin-bottom: 3rem; }
+  .r-tip-card {
+    background: #fff;
+    border: 1.5px solid #e7e4dd;
+    border-radius: 4px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    transition: all 0.25s;
+  }
+  .r-tip-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+  .r-tip-icon-wrap {
+    width: 44px; height: 44px;
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem; margin-bottom: 0.85rem;
+  }
+  .r-tip-tag {
+    display: inline-block;
+    font-size: 0.65rem; font-weight: 800;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: #fff; padding: 0.25rem 0.6rem;
+    border-radius: 2px; margin-bottom: 0.65rem;
+  }
+  .r-tip-card h4 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem; }
+  .r-tip-card p { font-size: 0.875rem; color: #78716c; line-height: 1.6; font-weight: 300; }
+
+  /* FORMULA BOX */
+  .r-formula-box { background: #111827; border-radius: 4px; padding: 2.5rem; }
+  .r-formula-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700; color: #f9fafb;
+    text-align: center; margin-bottom: 2rem;
+  }
+  .r-formula-row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; justify-content: center; }
+  .r-formula-piece {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 4px;
+    padding: 0.85rem 1.25rem;
+    min-width: 130px;
+    text-align: center;
+  }
+  .r-formula-piece-lbl { font-size: 0.6rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #6b7280; margin-bottom: 0.35rem; }
+  .r-formula-piece-val { font-size: 0.85rem; font-weight: 700; font-style: italic; }
+  .r-formula-plus { color: #4b5563; font-size: 1.25rem; font-weight: 700; }
+  .r-formula-result {
+    margin-top: 1.5rem;
+    background: rgba(26,86,219,0.15);
+    border: 1px solid rgba(26,86,219,0.3);
+    border-radius: 4px;
+    padding: 1rem 1.5rem;
+    text-align: center;
+  }
+  .r-formula-result-lbl { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #93c5fd; margin-bottom: 0.4rem; }
+  .r-formula-result-text { color: #e5e7eb; font-size: 0.925rem; font-weight: 500; line-height: 1.5; }
+
+  /* MISTAKES */
+  .r-mistakes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  @media (max-width: 768px) { .r-mistakes-grid { grid-template-columns: 1fr; } }
+  .r-mistake-card {
+    background: #fff;
+    border: 1.5px solid #e7e4dd;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .r-mistake-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.09); }
+  .r-mistake-card.open { border-width: 2px; }
+  .r-mistake-inner { display: flex; align-items: flex-start; gap: 1rem; padding: 1.25rem; }
+  .r-mistake-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .r-mistake-content { flex: 1; }
+  .r-mistake-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.4rem; }
+  .r-mistake-title { font-family: 'Playfair Display', serif; font-size: 0.975rem; font-weight: 700; color: #111827; }
+  .r-sev-badge { font-size: 0.65rem; font-weight: 800; padding: 0.25rem 0.6rem; border-radius: 2px; white-space: nowrap; flex-shrink: 0; letter-spacing: 0.05em; text-transform: uppercase; }
+  .sev-critical { background: #fee2e2; color: #b91c1c; }
+  .sev-high { background: #ffedd5; color: #c2410c; }
+  .sev-medium { background: #fef9c3; color: #a16207; }
+  .r-mistake-desc { font-size: 0.85rem; color: #6b7280; line-height: 1.55; font-weight: 300; }
+  .r-mistake-fix { margin: 0 1.25rem 1.25rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 4px; padding: 0.85rem 1rem; }
+  .r-fix-lbl { font-size: 0.6rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #15803d; margin-bottom: 0.3rem; }
+  .r-fix-text { font-size: 0.85rem; color: #374151; }
+
+  /* ATS */
+  .r-ats-intro { background: #111827; border-radius: 4px; padding: 2rem; margin-bottom: 2rem; }
+  .r-ats-intro h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: #60a5fa; margin-bottom: 0.75rem; }
+  .r-ats-intro p { font-size: 0.875rem; color: #9ca3af; line-height: 1.7; font-weight: 300; }
+  .r-ats-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1.5rem; }
+  @media (max-width: 640px) { .r-ats-stats { grid-template-columns: repeat(2, 1fr); } }
+  .r-ats-do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+  @media (max-width: 768px) { .r-ats-do-dont { grid-template-columns: 1fr; } }
+  .r-ats-panel { border-radius: 4px; padding: 1.75rem; }
+  .r-ats-panel.do { background: #f0fdf4; border: 2px solid #bbf7d0; }
+  .r-ats-panel.dont { background: #fef2f2; border: 2px solid #fecaca; }
+  .r-ats-panel h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 1.25rem; }
+  .r-ats-panel.do h3 { color: #15803d; }
+  .r-ats-panel.dont h3 { color: #b91c1c; }
+  .r-ats-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .r-ats-list li { display: flex; gap: 0.75rem; font-size: 0.875rem; color: #374151; align-items: flex-start; }
+  .r-num-badge {
+    width: 22px; height: 22px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem; font-weight: 800; color: #fff; flex-shrink: 0; margin-top: 1px;
+  }
+  .r-ats-tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  @media (max-width: 768px) { .r-ats-tools { grid-template-columns: 1fr; } }
+  .r-tool-card {
+    background: #fff;
+    border: 1.5px solid #e7e4dd;
+    border-radius: 4px;
+    padding: 1.5rem;
+    text-decoration: none;
+    display: block;
+    transition: all 0.2s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .r-tool-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+  .r-tool-card h4 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .r-tool-card p { font-size: 0.85rem; color: #6b7280; margin-bottom: 0.85rem; font-weight: 300; }
+  .r-tool-card span { font-size: 0.8rem; font-weight: 700; }
+
+  /* TEMPLATES */
+  .r-templates-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  @media (max-width: 900px) { .r-templates-grid { grid-template-columns: 1fr; } }
+  .r-tmpl-card {
+    background: #fff;
+    border: 1.5px solid #e7e4dd;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    transition: all 0.25s;
+  }
+  .r-tmpl-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+  .r-tmpl-accent { height: 4px; }
+  .r-tmpl-body { padding: 1.75rem; }
+  .r-tmpl-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1rem; }
+  .r-tmpl-id { display: flex; align-items: center; gap: 0.85rem; }
+  .r-tmpl-icon { width: 48px; height: 48px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+  .r-tmpl-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: #111827; }
+  .r-tmpl-src { font-size: 0.75rem; color: #9ca3af; margin-top: 0.15rem; }
+  .r-tmpl-tag { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; padding: 0.3rem 0.75rem; border-radius: 2px; white-space: nowrap; }
+  .r-tmpl-desc { font-size: 0.875rem; color: #6b7280; line-height: 1.65; margin-bottom: 1rem; font-weight: 300; }
+  .r-features { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+  .r-feature { font-size: 0.75rem; font-weight: 600; padding: 0.3rem 0.7rem; border-radius: 2px; }
+  .r-for-who { background: #f8f7f4; border-radius: 3px; padding: 0.75rem 1rem; margin-bottom: 1.25rem; }
+  .r-for-who-lbl { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #9ca3af; margin-bottom: 0.25rem; }
+  .r-for-who-val { font-size: 0.85rem; color: #374151; font-weight: 500; }
+  .r-tmpl-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; padding: 0.85rem;
+    border-radius: 3px; font-size: 0.85rem; font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    color: #fff; text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .r-tmpl-btn:hover { opacity: 0.88; }
+
+  /* PLATFORMS */
+  .r-platforms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-bottom: 2.5rem; }
+  @media (max-width: 900px) { .r-platforms-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .r-platforms-grid { grid-template-columns: 1fr; } }
+  .r-plat-card {
+    background: #fff;
+    border: 1.5px solid #e7e4dd;
+    border-radius: 4px;
+    padding: 1.5rem;
+    text-decoration: none;
+    display: block;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    transition: all 0.25s;
+  }
+  .r-plat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,0.1); }
+  .r-plat-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+  .r-plat-id { display: flex; align-items: center; gap: 0.65rem; }
+  .r-plat-icon-wrap { width: 42px; height: 42px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+  .r-plat-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #111827; }
+  .r-plat-free {
+    font-size: 0.65rem; font-weight: 800;
+    padding: 0.25rem 0.6rem; border-radius: 2px; letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .r-plat-free.free { background: #f0fdf4; color: #15803d; }
+  .r-plat-free.paid { background: #eff6ff; color: #1d4ed8; }
+  .r-rating { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; }
+  .r-plat-desc { font-size: 0.85rem; color: #6b7280; line-height: 1.6; margin-bottom: 1rem; font-weight: 300; }
+  .r-plat-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+  .r-plat-tag { font-size: 0.7rem; font-weight: 700; padding: 0.3rem 0.65rem; border-radius: 2px; color: #fff; }
+  .r-plat-cta { font-size: 0.75rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* COMPARISON TABLE */
+  .r-table-wrap {
+    background: #fff;
+    border: 1.5px solid #e7e4dd;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .r-table-head { padding: 1.25rem 1.75rem; border-bottom: 1px solid #e7e4dd; }
+  .r-table-head h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: #111827; }
+  .r-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+  .r-table thead tr { background: #111827; }
+  .r-table thead th { padding: 1rem 1.25rem; text-align: left; color: #f9fafb; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+  .r-table tbody tr { border-top: 1px solid #f3f4f6; transition: background 0.15s; }
+  .r-table tbody tr:nth-child(even) { background: #fafaf8; }
+  .r-table tbody tr:hover { background: #eff6ff; }
+  .r-table td { padding: 0.9rem 1.25rem; color: #374151; vertical-align: middle; }
+
+  /* TEAM SECTION */
+  .r-team-section {
+    background: #fff;
+    border-top: 2px solid #e7e4dd;
+    padding: 5rem 2rem;
+    margin-top: 0;
+  }
+  .r-team-inner { max-width: 1100px; margin: 0 auto; }
+  .r-team-header { text-align: center; margin-bottom: 3.5rem; }
+  .r-team-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 700; color: #111827;
+    margin-bottom: 0.6rem; letter-spacing: -0.02em;
+  }
+  .r-team-header p { color: #78716c; font-size: 1rem; font-weight: 300; }
+  .r-team-divider { width: 40px; height: 3px; background: #1a56db; margin: 0.85rem auto 0; }
+
+  .r-team-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  @media (max-width: 768px) { .r-team-grid { grid-template-columns: 1fr; } }
+
+  .r-member-card {
+    border: 1.5px solid #e7e4dd;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #fafaf8;
+    display: flex;
+    align-items: stretch;
+    transition: box-shadow 0.25s;
+  }
+  .r-member-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+
+  .r-member-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1.5rem;
+    border-right: 1.5px solid #e7e4dd;
+    background: #fff;
+    min-width: 160px;
+  }
+  .r-avatar {
+    width: 88px; height: 88px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.85rem;
+    border: 3px solid #e7e4dd;
+  }
+  .r-member-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem; font-weight: 700; color: #111827;
+    text-align: center; margin-bottom: 0.3rem; line-height: 1.3;
+  }
+  .r-member-role {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #9ca3af; text-align: center;
+  }
+
+  .r-member-right {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .r-member-bio { font-size: 0.9rem; color: #57534e; line-height: 1.7; font-weight: 300; margin-bottom: 1.5rem; }
+
+  .r-resume-viewer { border: 1.5px solid #e7e4dd; border-radius: 3px; overflow: hidden; background: #fff; }
+  .r-resume-viewer-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.65rem 1rem;
+    background: #f3f4f6;
+    border-bottom: 1px solid #e7e4dd;
+  }
+  .r-resume-viewer-label {
+    font-size: 0.7rem; font-weight: 800;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: #6b7280;
+  }
+  .r-resume-viewer-actions { display: flex; gap: 0.5rem; }
+  .r-open-btn {
+    font-size: 0.7rem; font-weight: 700;
+    padding: 0.3rem 0.75rem; border-radius: 2px;
+    color: #fff; text-decoration: none;
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .r-open-btn:hover { opacity: 0.85; }
+  .r-pdf-embed {
+    width: 100%; height: 280px;
+    border: none; display: block;
+  }
+  .r-pdf-fallback {
+    height: 280px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0.75rem; color: #9ca3af;
+    background: #f9fafb;
+  }
+  .r-pdf-fallback-icon { font-size: 2.5rem; }
+  .r-pdf-fallback-text { font-size: 0.8rem; font-weight: 500; text-align: center; }
+  .r-pdf-fallback a {
+    font-size: 0.8rem; font-weight: 700;
+    padding: 0.4rem 1.1rem; border-radius: 2px;
+    color: #fff; text-decoration: none;
+    display: inline-block;
+  }
+
+  /* FOOTER */
+  .r-footer { background: #111827; padding: 3rem 2rem; }
+  .r-footer-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
+  .r-footer-brand { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+  .r-footer-logo { width: 32px; height: 32px; background: linear-gradient(135deg, #1a56db, #3b82f6); border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+  .r-footer-logo span { color: #fff; font-weight: 800; font-size: 0.9rem; font-family: 'Playfair Display', serif; }
+  .r-footer-name { font-family: 'Playfair Display', serif; color: #f9fafb; font-size: 1.1rem; font-weight: 700; }
+  .r-footer-tagline { color: #6b7280; font-size: 0.85rem; margin-bottom: 1.5rem; font-weight: 300; }
+  .r-footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+  .r-footer-links span { color: #4b5563; font-size: 0.8rem; font-weight: 500; }
+  .r-footer-copy {
+    border-top: 1px solid #1f2937;
+    padding-top: 1.25rem;
+    color: #6b7280; font-size: 0.8rem;
+  }
+`
+
+// ─── COMPONENT ──────────────────────────────────────────────────────────────
+
 const Resume = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState('building')
   const [openStep, setOpenStep] = useState(null)
   const [openMistake, setOpenMistake] = useState(null)
- 
+
   return (
-    <div className="min-h-screen bg-slate-50 font-sans">
- 
-      {/* ── NAVBAR ── */}
-      <nav className="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 py-1 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-  <img 
-      src={logo} onClick={()=>navigate("/")}
-      alt="logo"
-      className="w-42 sm:w-45 cursor-pointer rounded-xl"
-    />
-          </div>
-          <div className="hidden md:flex gap-6 text-sm font-medium md:text-[18px] text-slate-800">
-            {resumeSections.slice(0, 4).map(s => (
-              <button key={s.id} onClick={() => setActiveTab(s.id)} className={`hover:text-emerald-600 transition-colors ${activeTab === s.id ? 'text-emerald-600 font-bold' : ''}`}>
-                {s.icon} {s.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      </nav>
- 
-      {/* ── HERO ── */}
-      <section className="bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-900 text-white py-20 px-6 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-10 left-10 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-10 right-10 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
-        </div>
-        <div className="max-w-5xl mx-auto text-center relative z-10">
-          <span className="inline-block bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-bold px-4 py-1.5 rounded-full mb-5 uppercase tracking-widest">
-            Complete Resume Guide 2026
-          </span>
-          <h1 className="text-5xl md:text-6xl font-extrabold mb-5 leading-tight">
-            Build a Resume That<br />
-            <span className="bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">Gets You Hired</span>
-          </h1>
-          <p className="text-slate-300 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-            Everything from structure to ATS optimization, top templates, common mistakes, and the best resume platforms — all in one place.
-          </p>
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 max-w-3xl mx-auto">
-            {[['7 sec', 'Recruiter scan time'], ['75%', 'Resumes ATS-rejected'], ['3x', 'Tailored resume callbacks'], ['1 Page', 'Ideal length (0–5 yrs)']].map(([val, label]) => (
-              <div key={label} className="bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-center">
-                <div className="text-2xl font-extrabold text-emerald-400">{val}</div>
-                <div className="text-slate-400 text-xs mt-1">{label}</div>
-              </div>
-            ))}
-          </div>
-          {/* Tab pills */}
-          <div className="flex flex-wrap justify-center gap-2">
-            {resumeSections.map(s => (
-              <button key={s.id} onClick={() => setActiveTab(s.id)}
-                className={`px-4 py-2 rounded-xl text-sm font-semibold border transition-all ${
-                  activeTab === s.id
-                    ? 'bg-emerald-500 border-emerald-500 text-white'
-                    : 'bg-white/10 border-white/20 text-slate-300 hover:bg-white/20'
-                }`}>
-                {s.icon} {s.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
- 
-      {/* ── STICKY SECTION TABS ── */}
-      <div className="bg-white border-b border-slate-200 sticky top-[65px] z-40">
-        <div className="max-w-7xl mx-auto px-6 flex gap-1 py-3 overflow-x-auto">
-          {resumeSections.map(s => (
-            <button key={s.id} onClick={() => setActiveTab(s.id)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold whitespace-nowrap transition-all ${
-                activeTab === s.id ? 'bg-emerald-600 text-white shadow-md' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-              }`}>
-              {s.icon} {s.label}
-            </button>
-          ))}
-        </div>
-      </div>
- 
-      <div className="max-w-7xl mx-auto px-6 py-16">
- 
-        {/* ════════════════════════════════════════════
-            TAB: BUILDING GUIDE
-        ════════════════════════════════════════════ */}
-        {activeTab === 'building' && (
-          <div>
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-extrabold text-slate-800 mb-3">🏗️ Resume Building Guide</h2>
-              <p className="text-slate-500 text-lg max-w-xl mx-auto">Section-by-section breakdown of what to include, what to avoid, and pro writing tips.</p>
+    <>
+      <style>{styles}</style>
+      <div className="resume-root">
+
+        {/* ── NAVBAR ── */}
+        <nav className="r-nav">
+          <div className="r-nav-inner">
+            <div className=" md:w-45 w-40 " onClick={() => navigate('/')}>
+              <img src={logo} alt="logo"  />
             </div>
- 
-            <div className="space-y-4">
-              {buildingGuide.map((section, i) => {
-                const isOpen = openStep === i
-                return (
-                  <div key={i} className={`bg-white rounded-2xl border-2 overflow-hidden transition-all shadow-sm ${isOpen ? '' : 'border-slate-200 hover:shadow-md'}`}
-                    style={isOpen ? { borderColor: section.color } : {}}>
-                    <button className="w-full flex items-center gap-4 p-6 text-left" onClick={() => setOpenStep(isOpen ? null : i)}>
-                      <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl flex-shrink-0" style={{ backgroundColor: section.color }}>
-                        {section.icon}
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3">
-                          <span className="text-xs font-bold text-slate-400">STEP {section.step}</span>
-                          <h3 className="text-xl font-extrabold text-slate-800">{section.title}</h3>
-                        </div>
-                      </div>
-                      <span className={`text-slate-400 transition-transform text-lg ${isOpen ? 'rotate-180' : ''}`}>▼</span>
-                    </button>
- 
-                    {isOpen && (
-                      <div className="px-6 pb-6 grid grid-cols-1 md:grid-cols-3 gap-5">
-                        {/* Must Include */}
-                        <div className="bg-green-50 border border-green-200 rounded-2xl p-5">
-                          <p className="text-xs font-extrabold text-green-700 uppercase tracking-wider mb-3">✅ Must Include</p>
-                          <ul className="space-y-2">
-                            {section.must.map((m, j) => (
-                              <li key={j} className="flex items-start gap-2 text-sm text-slate-700">
-                                <span className="text-green-500 mt-0.5 flex-shrink-0">•</span>{m}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                        {/* Avoid */}
-                        <div className="bg-red-50 border border-red-200 rounded-2xl p-5">
-                          <p className="text-xs font-extrabold text-red-700 uppercase tracking-wider mb-3">🚫 Avoid These</p>
-                          <ul className="space-y-2">
-                            {section.avoid.map((a, j) => (
-                              <li key={j} className="flex items-start gap-2 text-sm text-slate-700">
-                                <span className="text-red-500 mt-0.5 flex-shrink-0">•</span>{a}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                        {/* Pro Tip */}
-                        <div className="bg-slate-900 rounded-2xl p-5">
-                          <p className="text-xs font-extrabold text-amber-400 uppercase tracking-wider mb-3">💡 Pro Tip</p>
-                          <p className="text-sm text-slate-300 leading-relaxed italic">"{section.tip}"</p>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )
-              })}
-            </div>
- 
-            {/* Action Verbs */}
-            <div className="mt-14 bg-white rounded-3xl border border-slate-200 p-8 shadow-sm">
-              <h3 className="text-2xl font-extrabold text-slate-800 mb-2">⚡ Power Action Verbs for Your Resume</h3>
-              <p className="text-slate-500 text-sm mb-6">Start every bullet point with one of these strong verbs to make an immediate impact.</p>
-              <div className="flex flex-wrap gap-3">
-                {Object.entries(actionVerbs).map(([verb, color]) => (
-                  <span key={verb} className="px-4 py-2 rounded-xl text-sm font-extrabold text-white shadow-sm"
-                    style={{ backgroundColor: color }}>
-                    {verb}
-                  </span>
-                ))}
-              </div>
+            <div className="r-nav-links" style={{ display: 'none' }}>
+              {resumeSections.slice(0, 4).map(s => (
+                <button key={s.id} onClick={() => setActiveTab(s.id)} className={activeTab === s.id ? 'active' : ''}>
+                  {s.label}
+                </button>
+              ))}
             </div>
           </div>
-        )}
- 
-        {/* ════════════════════════════════════════════
-            TAB: PRO TIPS
-        ════════════════════════════════════════════ */}
-        {activeTab === 'tips' && (
-          <div>
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-extrabold text-slate-800 mb-3">💡 Pro Resume Tips</h2>
-              <p className="text-slate-500 text-lg max-w-xl mx-auto">Insider knowledge that separates great resumes from average ones.</p>
-            </div>
- 
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-14">
-              {proTips.map((tip, i) => (
-                <div key={i} className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4"
-                    style={{ backgroundColor: `${tip.color}18` }}>
-                    {tip.icon}
-                  </div>
-                  <span className="text-xs font-bold px-2.5 py-1 rounded-full text-white mb-3 inline-block"
-                    style={{ backgroundColor: tip.color }}>
-                    {tip.tag}
-                  </span>
-                  <h4 className="text-slate-800 font-extrabold text-base mb-2">{tip.title}</h4>
-                  <p className="text-slate-500 text-sm leading-relaxed">{tip.desc}</p>
+        </nav>
+
+        {/* ── HERO ── */}
+        <section className="r-hero">
+          <div className="r-hero-inner">
+            <div className="r-hero-badge">Complete Resume Guide · 2026</div>
+            <h1>
+              Build a Resume That<br />
+              <span>Gets You Hired</span>
+            </h1>
+            <p className="r-hero-sub">
+              Everything from structure to ATS optimization, top templates, common mistakes, and the best resume platforms — all in one definitive guide.
+            </p>
+            <div className="r-hero-stats">
+              {[['7 sec', 'Recruiter scan time'], ['75%', 'ATS-rejected resumes'], ['3×', 'Tailored resume callbacks'], ['1 Page', 'Ideal (0–5 yrs exp)']].map(([v, l]) => (
+                <div key={l} className="r-stat-box">
+                  <div className="r-stat-val">{v}</div>
+                  <div className="r-stat-lbl">{l}</div>
                 </div>
               ))}
             </div>
- 
-            {/* Bullet formula */}
-            <div className="bg-slate-900 rounded-3xl p-8 text-white">
-              <h3 className="text-2xl font-extrabold mb-6 text-center">🧪 The Perfect Bullet Point Formula</h3>
-              <div className="flex flex-wrap items-center justify-center gap-3 text-center">
-                {[
-                  { label: 'Action Verb', example: '"Built"', color: '#3B82F6' },
-                  { label: '+', example: '', color: 'transparent' },
-                  { label: 'What You Did', example: '"a REST API"', color: '#10B981' },
-                  { label: '+', example: '', color: 'transparent' },
-                  { label: 'Tech Used', example: '"using Node.js & Redis"', color: '#8B5CF6' },
-                  { label: '+', example: '', color: 'transparent' },
-                  { label: 'Result/Impact', example: '"reducing latency by 60%"', color: '#F59E0B' },
-                ].map((item, i) => (
-                  item.label === '+' ? (
-                    <span key={i} className="text-slate-400 text-2xl font-bold">+</span>
-                  ) : (
-                    <div key={i} className="bg-white/10 border border-white/20 rounded-2xl px-5 py-4 min-w-[140px]">
-                      <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">{item.label}</p>
-                      <p className="text-sm font-bold italic" style={{ color: item.color }}>{item.example}</p>
+            <div className="r-hero-pills">
+              {resumeSections.map(s => (
+                <button key={s.id} className={`r-pill${activeTab === s.id ? ' active' : ''}`} onClick={() => setActiveTab(s.id)}>
+                  {s.icon} {s.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── SECTION TABS BAR ── */}
+        <div className="r-tabs-bar">
+          <div className="r-tabs-inner">
+            {resumeSections.map(s => (
+              <button key={s.id} className={`r-tab-btn${activeTab === s.id ? ' active' : ''}`} onClick={() => setActiveTab(s.id)}>
+                {s.icon} {s.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* ── CONTENT ── */}
+        <div className="r-content">
+
+          {/* ── BUILDING GUIDE ── */}
+          {activeTab === 'building' && (
+            <div>
+              <div className="r-section-header">
+                <h2>Resume Building Guide</h2>
+                <p>Section-by-section breakdown of what to include, what to avoid, and expert writing tips.</p>
+                <div className="r-divider" />
+              </div>
+              <div className="r-accordion">
+                {buildingGuide.map((section, i) => {
+                  const isOpen = openStep === i
+                  return (
+                    <div key={i} className={`r-acc-card${isOpen ? ' open' : ''}`}>
+                      <button className="r-acc-btn" onClick={() => setOpenStep(isOpen ? null : i)}>
+                        <div className="r-step-badge" style={{ backgroundColor: section.color }}>{section.icon}</div>
+                        <div className="r-acc-meta">
+                          <div className="r-acc-num">Step {section.step}</div>
+                          <div className="r-acc-title">{section.title}</div>
+                        </div>
+                        <span className={`r-chevron${isOpen ? ' open' : ''}`}>▼</span>
+                      </button>
+                      {isOpen && (
+                        <div className="r-acc-body">
+                          <div className="r-acc-panel must">
+                            <div className="r-acc-panel-label">✅ Must Include</div>
+                            <ul className="r-panel-list">
+                              {section.must.map((m, j) => (
+                                <li key={j}><span style={{ color: '#16a34a' }}>•</span>{m}</li>
+                              ))}
+                            </ul>
+                          </div>
+                          <div className="r-acc-panel avoid">
+                            <div className="r-acc-panel-label">🚫 Avoid These</div>
+                            <ul className="r-panel-list">
+                              {section.avoid.map((a, j) => (
+                                <li key={j}><span style={{ color: '#dc2626' }}>•</span>{a}</li>
+                              ))}
+                            </ul>
+                          </div>
+                          <div className="r-acc-panel tip">
+                            <div className="r-acc-panel-label">💡 Expert Tip</div>
+                            <p className="r-tip-text">"{section.tip}"</p>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )
-                ))}
+                })}
               </div>
-              <div className="mt-6 bg-white/10 rounded-2xl p-4 text-center">
-                <p className="text-emerald-400 font-bold text-sm">✨ Result:</p>
-                <p className="text-white mt-1 font-semibold">"Built a REST API using Node.js & Redis, reducing API latency by 60% for 500K daily users."</p>
-              </div>
-            </div>
-          </div>
-        )}
- 
-        {/* ════════════════════════════════════════════
-            TAB: MISTAKES
-        ════════════════════════════════════════════ */}
-        {activeTab === 'mistakes' && (
-          <div>
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-extrabold text-slate-800 mb-3">🚫 Resume Mistakes to Avoid</h2>
-              <p className="text-slate-500 text-lg max-w-xl mx-auto">10 common mistakes that get resumes instantly rejected — and how to fix each one.</p>
-            </div>
- 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {mistakes.map((m, i) => {
-                const isOpen = openMistake === i
-                return (
-                  <div key={i}
-                    className={`bg-white rounded-2xl border overflow-hidden transition-all shadow-sm cursor-pointer ${isOpen ? 'border-2 shadow-lg' : 'border-slate-200 hover:shadow-md'}`}
-                    style={isOpen ? { borderColor: m.severity === 'Critical' ? '#EF4444' : m.severity === 'High' ? '#F97316' : '#EAB308' } : {}}
-                    onClick={() => setOpenMistake(isOpen ? null : i)}
-                  >
-                    <div className="flex items-start gap-4 p-5">
-                      <span className="text-2xl flex-shrink-0 mt-0.5">{m.icon}</span>
-                      <div className="flex-1">
-                        <div className="flex items-start justify-between gap-2 mb-1">
-                          <h4 className="font-extrabold text-slate-800 text-base">{m.title}</h4>
-                          <span className={`text-xs font-bold px-2.5 py-1 rounded-full whitespace-nowrap flex-shrink-0 ${m.sevColor}`}>
-                            {m.severity}
-                          </span>
-                        </div>
-                        <p className="text-slate-500 text-sm leading-relaxed">{m.desc}</p>
-                      </div>
-                    </div>
-                    {isOpen && (
-                      <div className="mx-5 mb-5 bg-green-50 border border-green-200 rounded-xl p-4">
-                        <p className="text-xs font-extrabold text-green-700 uppercase tracking-wider mb-1">✅ How to Fix</p>
-                        <p className="text-sm text-slate-700">{m.fix}</p>
-                      </div>
-                    )}
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        )}
- 
-        {/* ════════════════════════════════════════════
-            TAB: ATS GUIDE
-        ════════════════════════════════════════════ */}
-        {activeTab === 'ats' && (
-          <div>
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-extrabold text-slate-800 mb-3">🤖 ATS Optimization Guide</h2>
-              <p className="text-slate-500 text-lg max-w-xl mx-auto">Beat the bots before a human ever sees your resume.</p>
-            </div>
- 
-            {/* What is ATS */}
-            <div className="bg-slate-900 rounded-3xl p-8 text-white mb-8">
-              <h3 className="text-xl font-extrabold text-emerald-400 mb-3">What is ATS?</h3>
-              <p className="text-slate-300 leading-relaxed text-sm">{atsGuide.what}</p>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-                {atsGuide.stats.map(s => (
-                  <div key={s.label} className="bg-white/10 border border-white/20 rounded-xl p-4 text-center">
-                    <div className="text-2xl font-extrabold text-emerald-400">{s.value}</div>
-                    <div className="text-slate-400 text-xs mt-1">{s.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
- 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              {/* DOs */}
-              <div className="bg-green-50 border-2 border-green-200 rounded-3xl p-7">
-                <h3 className="text-xl font-extrabold text-green-700 mb-5">✅ ATS DO's</h3>
-                <ul className="space-y-3">
-                  {atsGuide.dos.map((d, i) => (
-                    <li key={i} className="flex items-start gap-3 text-sm text-slate-700">
-                      <span className="w-6 h-6 rounded-full bg-green-500 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">{i + 1}</span>
-                      {d}
-                    </li>
+
+              <div className="r-verbs-box">
+                <h3>Power Action Verbs</h3>
+                <p>Start every bullet point with one of these strong verbs for immediate impact.</p>
+                <div className="r-verbs-grid">
+                  {Object.entries(actionVerbs).map(([verb, color]) => (
+                    <span key={verb} className="r-verb" style={{ backgroundColor: color }}>{verb}</span>
                   ))}
-                </ul>
-              </div>
-              {/* DON'Ts */}
-              <div className="bg-red-50 border-2 border-red-200 rounded-3xl p-7">
-                <h3 className="text-xl font-extrabold text-red-700 mb-5">🚫 ATS DON'Ts</h3>
-                <ul className="space-y-3">
-                  {atsGuide.donts.map((d, i) => (
-                    <li key={i} className="flex items-start gap-3 text-sm text-slate-700">
-                      <span className="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">✗</span>
-                      {d}
-                    </li>
-                  ))}
-                </ul>
+                </div>
               </div>
             </div>
- 
-            {/* ATS Tools */}
+          )}
+
+          {/* ── PRO TIPS ── */}
+          {activeTab === 'tips' && (
             <div>
-              <h3 className="text-2xl font-extrabold text-slate-800 mb-5">🔧 Best ATS Checker Tools</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                {atsGuide.tools.map(t => (
-                  <a key={t.name} href={t.url} target="_blank" rel="noopener noreferrer"
-                    className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all block">
-                    <h4 className="font-extrabold text-slate-800 text-lg mb-2" style={{ color: t.color }}>{t.name}</h4>
-                    <p className="text-slate-500 text-sm mb-4">{t.desc}</p>
-                    <span className="text-xs font-bold" style={{ color: t.color }}>Visit {t.name} →</span>
+              <div className="r-section-header">
+                <h2>Pro Resume Tips</h2>
+                <p>Insider knowledge that separates great resumes from average ones.</p>
+                <div className="r-divider" />
+              </div>
+              <div className="r-tips-grid">
+                {proTips.map((tip, i) => (
+                  <div key={i} className="r-tip-card">
+                    <div className="r-tip-icon-wrap" style={{ backgroundColor: `${tip.color}15` }}>{tip.icon}</div>
+                    <span className="r-tip-tag" style={{ backgroundColor: tip.color }}>{tip.tag}</span>
+                    <h4>{tip.title}</h4>
+                    <p>{tip.desc}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="r-formula-box">
+                <h3>The Perfect Bullet Point Formula</h3>
+                <div className="r-formula-row">
+                  {[
+                    { label: 'Action Verb', val: '"Built"', color: '#60a5fa' },
+                    null,
+                    { label: 'What You Did', val: '"a REST API"', color: '#34d399' },
+                    null,
+                    { label: 'Tech Used', val: '"using Node.js & Redis"', color: '#a78bfa' },
+                    null,
+                    { label: 'Result / Impact', val: '"reducing latency by 60%"', color: '#fbbf24' },
+                  ].map((item, i) => (
+                    item === null
+                      ? <span key={i} className="r-formula-plus">+</span>
+                      : (
+                        <div key={i} className="r-formula-piece">
+                          <div className="r-formula-piece-lbl">{item.label}</div>
+                          <div className="r-formula-piece-val" style={{ color: item.color }}>{item.val}</div>
+                        </div>
+                      )
+                  ))}
+                </div>
+                <div className="r-formula-result">
+                  <div className="r-formula-result-lbl">✨ Result</div>
+                  <div className="r-formula-result-text">"Built a REST API using Node.js & Redis, reducing API latency by 60% for 500K daily users."</div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ── MISTAKES ── */}
+          {activeTab === 'mistakes' && (
+            <div>
+              <div className="r-section-header">
+                <h2>Mistakes to Avoid</h2>
+                <p>10 common errors that get resumes rejected — and how to fix each one.</p>
+                <div className="r-divider" />
+              </div>
+              <div className="r-mistakes-grid">
+                {mistakes.map((m, i) => {
+                  const isOpen = openMistake === i
+                  const borderColor = m.severity === 'Critical' ? '#ef4444' : m.severity === 'High' ? '#f97316' : '#eab308'
+                  return (
+                    <div key={i}
+                      className={`r-mistake-card${isOpen ? ' open' : ''}`}
+                      style={isOpen ? { borderColor } : {}}
+                      onClick={() => setOpenMistake(isOpen ? null : i)}
+                    >
+                      <div className="r-mistake-inner">
+                        <span className="r-mistake-icon">{m.icon}</span>
+                        <div className="r-mistake-content">
+                          <div className="r-mistake-header">
+                            <div className="r-mistake-title">{m.title}</div>
+                            <span className={`r-sev-badge ${m.sevColor}`}>{m.severity}</span>
+                          </div>
+                          <p className="r-mistake-desc">{m.desc}</p>
+                        </div>
+                      </div>
+                      {isOpen && (
+                        <div className="r-mistake-fix">
+                          <div className="r-fix-lbl">✅ How to Fix</div>
+                          <p className="r-fix-text">{m.fix}</p>
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* ── ATS GUIDE ── */}
+          {activeTab === 'ats' && (
+            <div>
+              <div className="r-section-header">
+                <h2>ATS Optimization Guide</h2>
+                <p>Beat the automated screening before a human ever sees your resume.</p>
+                <div className="r-divider" />
+              </div>
+              <div className="r-ats-intro">
+                <h3>What is ATS?</h3>
+                <p>{atsGuide.what}</p>
+                <div className="r-ats-stats">
+                  {atsGuide.stats.map(s => (
+                    <div key={s.label} className="r-stat-box">
+                      <div className="r-stat-val">{s.value}</div>
+                      <div className="r-stat-lbl">{s.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="r-ats-do-dont">
+                <div className="r-ats-panel do">
+                  <h3>✅ ATS Do's</h3>
+                  <ul className="r-ats-list">
+                    {atsGuide.dos.map((d, i) => (
+                      <li key={i}>
+                        <span className="r-num-badge" style={{ backgroundColor: '#15803d' }}>{i + 1}</span>
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="r-ats-panel dont">
+                  <h3>🚫 ATS Don'ts</h3>
+                  <ul className="r-ats-list">
+                    {atsGuide.donts.map((d, i) => (
+                      <li key={i}>
+                        <span className="r-num-badge" style={{ backgroundColor: '#b91c1c' }}>✗</span>
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div style={{ marginBottom: '1rem' }}>
+                <div className="r-section-header" style={{ textAlign: 'left', marginBottom: '1.25rem' }}>
+                  <h2 style={{ fontSize: '1.3rem' }}>Best ATS Checker Tools</h2>
+                </div>
+                <div className="r-ats-tools">
+                  {atsGuide.tools.map(t => (
+                    <a key={t.name} href={t.url} target="_blank" rel="noopener noreferrer" className="r-tool-card">
+                      <h4 style={{ color: t.color }}>{t.name}</h4>
+                      <p>{t.desc}</p>
+                      <span style={{ color: t.color }}>Visit {t.name} →</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ── TEMPLATES ── */}
+          {activeTab === 'templates' && (
+            <div>
+              <div className="r-section-header">
+                <h2>Best Resume Templates</h2>
+                <p>From Overleaf LaTeX to online builders — the best templates for engineers and job seekers.</p>
+                <div className="r-divider" />
+              </div>
+              <div className="r-templates-grid">
+                {templates.map((t, i) => (
+                  <div key={i} className="r-tmpl-card">
+                    <div className="r-tmpl-accent" style={{ backgroundColor: t.color }} />
+                    <div className="r-tmpl-body">
+                      <div className="r-tmpl-header">
+                        <div className="r-tmpl-id">
+                          <div className="r-tmpl-icon" style={{ backgroundColor: `${t.color}15` }}>{t.icon}</div>
+                          <div>
+                            <div className="r-tmpl-name">{t.name}</div>
+                            <div className="r-tmpl-src">Source: {t.source}</div>
+                          </div>
+                        </div>
+                        <span className="r-tmpl-tag" style={{ backgroundColor: t.tagColor }}>{t.tag}</span>
+                      </div>
+                      <p className="r-tmpl-desc">{t.desc}</p>
+                      <div className="r-features">
+                        {t.features.map(f => (
+                          <span key={f} className="r-feature" style={{ backgroundColor: `${t.color}12`, color: t.color }}>{f}</span>
+                        ))}
+                      </div>
+                      <div className="r-for-who">
+                        <div className="r-for-who-lbl">Best For</div>
+                        <div className="r-for-who-val">{t.forWho}</div>
+                      </div>
+                      <a href={t.url} target="_blank" rel="noopener noreferrer" className="r-tmpl-btn" style={{ backgroundColor: t.color }}>
+                        Use This Template →
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* ── PLATFORMS ── */}
+          {activeTab === 'platforms' && (
+            <div>
+              <div className="r-section-header">
+                <h2>Best Resume Platforms</h2>
+                <p>Top 5 platforms to build a professional resume — compared and rated.</p>
+                <div className="r-divider" />
+              </div>
+              <div className="r-platforms-grid">
+                {platforms.map((p, i) => (
+                  <a key={i} href={p.url} target="_blank" rel="noopener noreferrer" className="r-plat-card">
+                    <div className="r-plat-header">
+                      <div className="r-plat-id">
+                        <div className="r-plat-icon-wrap" style={{ backgroundColor: `${p.color}15` }}>{p.icon}</div>
+                        <div>
+                          <div className="r-plat-name">{p.name}</div>
+                          <span className={`r-plat-free ${p.free ? 'free' : 'paid'}`}>{p.free ? '✓ Free Plan' : 'Paid'}</span>
+                        </div>
+                      </div>
+                      <div className="r-rating" style={{ color: p.color }}>★ {p.rating}</div>
+                    </div>
+                    <p className="r-plat-desc">{p.desc}</p>
+                    <div className="r-plat-tags">
+                      {p.tags.map(tag => (
+                        <span key={tag} className="r-plat-tag" style={{ backgroundColor: p.color }}>{tag}</span>
+                      ))}
+                    </div>
+                    <div className="r-plat-cta" style={{ color: p.color }}>Build on {p.name} →</div>
                   </a>
                 ))}
               </div>
-            </div>
-          </div>
-        )}
- 
-        {/* ════════════════════════════════════════════
-            TAB: TEMPLATES
-        ════════════════════════════════════════════ */}
-        {activeTab === 'templates' && (
-          <div>
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-extrabold text-slate-800 mb-3">📄 Best Resume Templates</h2>
-              <p className="text-slate-500 text-lg max-w-xl mx-auto">From Overleaf LaTeX to online builders — the best templates for software engineers and job seekers.</p>
-            </div>
- 
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-7">
-              {templates.map((t, i) => (
-                <div key={i} className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                  <div className="p-7" style={{ borderTop: `5px solid ${t.color}` }}>
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex items-center gap-4">
-                        <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl"
-                          style={{ backgroundColor: `${t.color}18` }}>
-                          {t.icon}
-                        </div>
-                        <div>
-                          <h3 className="text-xl font-extrabold text-slate-900">{t.name}</h3>
-                          <p className="text-xs text-slate-400 mt-0.5">Source: {t.source}</p>
-                        </div>
-                      </div>
-                      <span className={`${t.tagColor} text-white text-xs font-bold px-3 py-1.5 rounded-full whitespace-nowrap`}>{t.tag}</span>
-                    </div>
-                    <p className="text-slate-600 text-sm leading-relaxed mb-5">{t.desc}</p>
-                    <div className="mb-4">
-                      <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Features</p>
-                      <div className="flex flex-wrap gap-2">
-                        {t.features.map(f => (
-                          <span key={f} className="text-xs px-3 py-1.5 rounded-full font-semibold"
-                            style={{ backgroundColor: `${t.color}15`, color: t.color }}>
-                            {f}
-                          </span>
+
+              <div className="r-table-wrap">
+                <div className="r-table-head"><h3>Platform Comparison</h3></div>
+                <div style={{ overflowX: 'auto' }}>
+                  <table className="r-table">
+                    <thead>
+                      <tr>
+                        {['Platform', 'Free Plan', 'AI Features', 'ATS Friendly', 'Rating', 'Best For'].map(h => (
+                          <th key={h}>{h}</th>
                         ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {platforms.map(p => (
+                        <tr key={p.name}>
+                          <td><strong>{p.icon} {p.name}</strong></td>
+                          <td><span className={`r-sev-badge ${p.free ? 'sev-medium' : 'sev-critical'}`}>{p.free ? '✓ Yes' : '✗ No'}</span></td>
+                          <td>{p.tags.some(t => t.includes('AI')) ? '✅ Yes' : '—'}</td>
+                          <td style={{ color: '#15803d', fontWeight: 700 }}>✅ Yes</td>
+                          <td><strong style={{ color: p.color }}>★ {p.rating}</strong></td>
+                          <td style={{ color: '#6b7280', fontSize: '0.8rem' }}>{p.tags[0]}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          )}
+
+        </div>
+
+        {/* ════════════════════════════════════════════
+            TEAM / CREATORS SECTION
+        ════════════════════════════════════════════ */}
+        <section className="r-team-section">
+          <div className="r-team-inner">
+            <div className="r-team-header">
+              <h2>Meet the Creators</h2>
+              <p>The team behind this guide — experienced developers dedicated to helping job seekers succeed.</p>
+              <div className="r-team-divider" />
+            </div>
+
+            <div className="r-team-grid">
+              {teamMembers.map((member, i) => (
+                <div key={i} className="r-member-card">
+                  {/* Left: Photo / Avatar + Name */}
+                  <div className="r-member-left">
+                    {/* <div className="r-avatar" style={{ backgroundColor: member.color }}>
+                      {member.initials}
+                    </div> */}
+                   
+                      <img 
+                        src={member.photo}  // import photo at top of file
+                        alt={member.name}
+                        style={{ width: 250, height: 388, borderRadius: '', objectFit: 'cover', border: '3px solid #e7e4dd', marginBottom: '0.85rem' }}
+                      />
+                   
+                    <div className="r-member-name">{member.name}</div>
+                    <div className="r-member-role">{member.role}</div>
+                  </div>
+
+                  {/* Right: Bio + Resume PDF Viewer */}
+                  <div className="r-member-right">
+                    <p className="r-member-bio">{member.bio}</p>
+
+                    <div className="r-resume-viewer">
+                      <div className="r-resume-viewer-header">
+                        <span className="r-resume-viewer-label">📄 Resume Preview</span>
+                        <div className="r-resume-viewer-actions">
+                          <a
+                            href={member.resumeUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="r-open-btn"
+                            style={{ backgroundColor: member.color }}
+                          >
+                            Open PDF
+                          </a>
+                          <a
+                            href={member.resumeUrl}
+                            download
+                            className="r-open-btn"
+                            style={{ backgroundColor: '#374151' }}
+                          >
+                            Download
+                          </a>
+                        </div>
                       </div>
+                      {/* PDF Embed — shows inline preview if PDF is accessible */}
+                      <object
+                        data={member.resumeUrl}
+                        type="application/pdf"
+                        className="r-pdf-embed"
+                      >
+                        {/* Fallback if browser can't embed PDF */}
+                        <div className="r-pdf-fallback">
+                          <span className="r-pdf-fallback-icon">📄</span>
+                          <span className="r-pdf-fallback-text">PDF preview not available in this browser</span>
+                          <a
+                            href={member.resumeUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ backgroundColor: member.color }}
+                          >
+                            View Resume →
+                          </a>
+                        </div>
+                      </object>
                     </div>
-                    <div className="bg-slate-50 rounded-xl p-3 mb-5">
-                      <p className="text-xs font-bold text-slate-500 mb-1">👤 Best For</p>
-                      <p className="text-sm text-slate-700 font-medium">{t.forWho}</p>
-                    </div>
-                    <a href={t.url} target="_blank" rel="noopener noreferrer"
-                      className="flex items-center justify-center w-full py-3 rounded-xl text-sm font-bold text-white hover:opacity-90 transition-opacity"
-                      style={{ backgroundColor: t.color }}>
-                      Use This Template →
-                    </a>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-        )}
- 
-        {/* ════════════════════════════════════════════
-            TAB: PLATFORMS
-        ════════════════════════════════════════════ */}
-        {activeTab === 'platforms' && (
-          <div>
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-extrabold text-slate-800 mb-3">🌐 Best Resume Building Platforms</h2>
-              <p className="text-slate-500 text-lg max-w-xl mx-auto">Top 5 platforms to build a professional resume — compared and rated.</p>
+        </section>
+
+        {/* ── FOOTER ── */}
+        <footer className="r-footer">
+          <div className="r-footer-inner">
+            <div className="r-footer-brand">
+              <div className="r-footer-logo"><span>R</span></div>
+              <span className="r-footer-name">ResumeCraft</span>
             </div>
- 
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7 mb-12">
-              {platforms.map((p, i) => (
-                <a key={i} href={p.url} target="_blank" rel="noopener noreferrer"
-                  className="bg-white rounded-3xl border border-slate-200 p-7 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 block group">
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
-                        style={{ backgroundColor: `${p.color}15` }}>
-                        {p.icon}
-                      </div>
-                      <div>
-                        <h4 className="font-extrabold text-slate-800 text-lg group-hover:text-emerald-600 transition-colors">{p.name}</h4>
-                        <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${p.free ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'}`}>
-                          {p.free ? '✓ Free Plan' : '💳 Paid'}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-xl font-extrabold" style={{ color: p.color }}>★ {p.rating}</div>
-                    </div>
-                  </div>
-                  <p className="text-slate-500 text-sm leading-relaxed mb-5">{p.desc}</p>
-                  <div className="flex flex-wrap gap-2 mb-5">
-                    {p.tags.map(tag => (
-                      <span key={tag} className="text-xs px-3 py-1.5 rounded-full font-semibold text-white"
-                        style={{ backgroundColor: p.color }}>
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <p className="text-xs font-bold transition-colors" style={{ color: p.color }}>
-                    Build Resume on {p.name} →
-                  </p>
-                </a>
-              ))}
+            <p className="r-footer-tagline">Your complete guide to building a job-winning resume in 2026.</p>
+            <div className="r-footer-links">
+              {resumeSections.map(s => <span key={s.id}>{s.icon} {s.label}</span>)}
             </div>
- 
-            {/* Comparison Table */}
-            <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
-              <div className="px-7 py-5 border-b border-slate-100">
-                <h3 className="text-2xl font-extrabold text-slate-800">Platform Quick Comparison</h3>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="bg-slate-900 text-white">
-                      {['Platform', 'Free Plan', 'AI Features', 'ATS Friendly', 'Rating', 'Best For'].map((h, i) => (
-                        <th key={h} className={`text-left px-6 py-4 font-bold ${i === 0 ? 'rounded-tl-none' : ''}`}>{h}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {platforms.map((p, idx) => (
-                      <tr key={p.name} className={`border-t border-slate-100 hover:bg-emerald-50 transition-colors ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/40'}`}>
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-2 font-bold text-slate-800">{p.icon} {p.name}</div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${p.free ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-600'}`}>
-                            {p.free ? '✓ Yes' : '✗ No'}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 text-slate-600">{p.tags.includes('AI Writing') || p.tags.includes('AI Assistant') || p.tags.includes('Content Suggestions') ? '✅ Yes' : '—'}</td>
-                        <td className="px-6 py-4"><span className="text-xs font-bold text-green-700">✅ Yes</span></td>
-                        <td className="px-6 py-4"><span className="bg-amber-50 text-amber-700 font-bold px-2.5 py-1 rounded-lg text-xs">★ {p.rating}</span></td>
-                        <td className="px-6 py-4 text-slate-500 text-xs">{p.tags[0]}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+            <div className="r-footer-copy">
+              © 2026 aiplacprep@gmail.com · Built for students and professionals aiming for their dream job.
             </div>
           </div>
-        )}
- 
+        </footer>
+
       </div>
- 
-      {/* ── FOOTER ── */}
-      <footer className="bg-slate-900 text-slate-400 py-10 mt-10">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <div className="flex items-center justify-center gap-3 mb-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-emerald-600 to-blue-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">R</span>
-            </div>
-            <span className="text-white font-bold text-lg">ResumeCraft</span>
-          </div>
-          <p className="text-sm mb-4">Your complete guide to building a job-winning resume in 2024.</p>
-          <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-500 mb-4">
-            {resumeSections.map(s => <span key={s.id}>{s.icon} {s.label}</span>)}
-          </div>
-          <p className="text-xs text-white md:text-[15px] border-t border-slate-800 pt-4">
-            © 2026 aiplacprep@gmail.com  Built for students and professionals aiming for their dream job.
-          </p>
-        </div>
-      </footer>
-    </div>
+    </>
   )
 }
- 
+
 export default Resume

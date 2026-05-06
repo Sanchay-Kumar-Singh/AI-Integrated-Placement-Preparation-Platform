@@ -6,10 +6,10 @@ import logo from '../../assets/image.png'
 
 const NAV = [
   { id: 'algorithms', label: 'Algorithms', icon: '⚙️' },
-  { id: 'questions',  label: 'All Questions', icon: '📌' },
+  { id: 'questions', label: 'All Questions', icon: '📌' },
   { id: 'complexity', label: 'Big-O Guide', icon: '📐' },
-  { id: 'concepts',   label: 'Core Concepts', icon: '🧩' },
-  { id: 'tips',       label: 'Pro Tips', icon: '💎' },
+  { id: 'concepts', label: 'Core Concepts', icon: '🧩' },
+  { id: 'tips', label: 'Pro Tips', icon: '💎' },
 ]
 
 // ─── ALGORITHMS DATA ──────────────────────────────────────────────────────
@@ -775,72 +775,72 @@ function buildLPS(p) {
 // ─── ALL QUESTIONS ────────────────────────────────────────────────────────
 
 const ALL_QUESTIONS = [
-  { id: 1,  title: 'Two Sum',                          diff: 'Easy',   cat: 'Arrays',        lc: 'https://leetcode.com/problems/two-sum/', gfg: 'https://www.geeksforgeeks.org/check-if-pair-with-given-sum-exists-in-array/', pattern: 'Hash Map' },
-  { id: 2,  title: 'Add Two Numbers',                  diff: 'Medium', cat: 'Linked List',   lc: 'https://leetcode.com/problems/add-two-numbers/', gfg: 'https://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-lists/', pattern: 'Simulation' },
-  { id: 3,  title: 'Longest Substring Without Repeating', diff: 'Medium', cat: 'Strings',    lc: 'https://leetcode.com/problems/longest-substring-without-repeating-characters/', gfg: 'https://www.geeksforgeeks.org/length-of-the-longest-substring-without-repeating-characters/', pattern: 'Sliding Window' },
-  { id: 4,  title: 'Median of Two Sorted Arrays',      diff: 'Hard',   cat: 'Binary Search', lc: 'https://leetcode.com/problems/median-of-two-sorted-arrays/', gfg: 'https://www.geeksforgeeks.org/median-of-two-sorted-arrays/', pattern: 'Binary Search' },
-  { id: 5,  title: 'Longest Palindromic Substring',    diff: 'Medium', cat: 'Strings',       lc: 'https://leetcode.com/problems/longest-palindromic-substring/', gfg: 'https://www.geeksforgeeks.org/longest-palindromic-substring/', pattern: 'Expand Around Center' },
-  { id: 11, title: 'Container With Most Water',        diff: 'Medium', cat: 'Arrays',        lc: 'https://leetcode.com/problems/container-with-most-water/', gfg: 'https://www.geeksforgeeks.org/container-with-most-water/', pattern: 'Two Pointers' },
-  { id: 15, title: '3Sum',                             diff: 'Medium', cat: 'Arrays',        lc: 'https://leetcode.com/problems/3sum/', gfg: 'https://www.geeksforgeeks.org/find-a-triplet-that-sum-to-a-given-value/', pattern: 'Two Pointers' },
+  { id: 1, title: 'Two Sum', diff: 'Easy', cat: 'Arrays', lc: 'https://leetcode.com/problems/two-sum/', gfg: 'https://www.geeksforgeeks.org/check-if-pair-with-given-sum-exists-in-array/', pattern: 'Hash Map' },
+  { id: 2, title: 'Add Two Numbers', diff: 'Medium', cat: 'Linked List', lc: 'https://leetcode.com/problems/add-two-numbers/', gfg: 'https://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-lists/', pattern: 'Simulation' },
+  { id: 3, title: 'Longest Substring Without Repeating', diff: 'Medium', cat: 'Strings', lc: 'https://leetcode.com/problems/longest-substring-without-repeating-characters/', gfg: 'https://www.geeksforgeeks.org/length-of-the-longest-substring-without-repeating-characters/', pattern: 'Sliding Window' },
+  { id: 4, title: 'Median of Two Sorted Arrays', diff: 'Hard', cat: 'Binary Search', lc: 'https://leetcode.com/problems/median-of-two-sorted-arrays/', gfg: 'https://www.geeksforgeeks.org/median-of-two-sorted-arrays/', pattern: 'Binary Search' },
+  { id: 5, title: 'Longest Palindromic Substring', diff: 'Medium', cat: 'Strings', lc: 'https://leetcode.com/problems/longest-palindromic-substring/', gfg: 'https://www.geeksforgeeks.org/longest-palindromic-substring/', pattern: 'Expand Around Center' },
+  { id: 11, title: 'Container With Most Water', diff: 'Medium', cat: 'Arrays', lc: 'https://leetcode.com/problems/container-with-most-water/', gfg: 'https://www.geeksforgeeks.org/container-with-most-water/', pattern: 'Two Pointers' },
+  { id: 15, title: '3Sum', diff: 'Medium', cat: 'Arrays', lc: 'https://leetcode.com/problems/3sum/', gfg: 'https://www.geeksforgeeks.org/find-a-triplet-that-sum-to-a-given-value/', pattern: 'Two Pointers' },
   { id: 17, title: 'Letter Combinations of Phone Number', diff: 'Medium', cat: 'Backtracking', lc: 'https://leetcode.com/problems/letter-combinations-of-a-phone-number/', gfg: 'https://www.geeksforgeeks.org/find-possible-words-phone-digits/', pattern: 'Backtracking' },
-  { id: 19, title: 'Remove Nth Node From End',         diff: 'Medium', cat: 'Linked List',   lc: 'https://leetcode.com/problems/remove-nth-node-from-end-of-list/', gfg: 'https://www.geeksforgeeks.org/delete-nth-node-from-the-end-of-the-given-linked-list/', pattern: 'Fast & Slow Pointer' },
-  { id: 20, title: 'Valid Parentheses',                diff: 'Easy',   cat: 'Stack',         lc: 'https://leetcode.com/problems/valid-parentheses/', gfg: 'https://www.geeksforgeeks.org/check-for-balanced-parentheses-in-an-expression/', pattern: 'Stack' },
-  { id: 21, title: 'Merge Two Sorted Lists',           diff: 'Easy',   cat: 'Linked List',   lc: 'https://leetcode.com/problems/merge-two-sorted-lists/', gfg: 'https://www.geeksforgeeks.org/merge-two-sorted-linked-lists/', pattern: 'Two Pointers' },
-  { id: 23, title: 'Merge K Sorted Lists',             diff: 'Hard',   cat: 'Heap',          lc: 'https://leetcode.com/problems/merge-k-sorted-lists/', gfg: 'https://www.geeksforgeeks.org/merge-k-sorted-linked-lists/', pattern: 'Min Heap' },
-  { id: 33, title: 'Search in Rotated Sorted Array',   diff: 'Medium', cat: 'Binary Search', lc: 'https://leetcode.com/problems/search-in-rotated-sorted-array/', gfg: 'https://www.geeksforgeeks.org/search-an-element-in-a-sorted-and-pivoted-array/', pattern: 'Binary Search' },
-  { id: 39, title: 'Combination Sum',                  diff: 'Medium', cat: 'Backtracking',  lc: 'https://leetcode.com/problems/combination-sum/', gfg: 'https://www.geeksforgeeks.org/combinational-sum/', pattern: 'Backtracking' },
-  { id: 42, title: 'Trapping Rain Water',              diff: 'Hard',   cat: 'Arrays',        lc: 'https://leetcode.com/problems/trapping-rain-water/', gfg: 'https://www.geeksforgeeks.org/trapping-rain-water/', pattern: 'Two Pointers / Stack' },
-  { id: 46, title: 'Permutations',                     diff: 'Medium', cat: 'Backtracking',  lc: 'https://leetcode.com/problems/permutations/', gfg: 'https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/', pattern: 'Backtracking' },
-  { id: 48, title: 'Rotate Image',                     diff: 'Medium', cat: 'Arrays',        lc: 'https://leetcode.com/problems/rotate-image/', gfg: 'https://www.geeksforgeeks.org/rotate-a-matrix-by-90-degree-in-clockwise-direction-without-using-any-extra-space/', pattern: 'In-Place Matrix' },
-  { id: 49, title: 'Group Anagrams',                   diff: 'Medium', cat: 'Strings',       lc: 'https://leetcode.com/problems/group-anagrams/', gfg: 'https://www.geeksforgeeks.org/given-a-sequence-of-words-print-all-anagrams-together/', pattern: 'Hash Map + Sort' },
-  { id: 51, title: 'N-Queens',                         diff: 'Hard',   cat: 'Backtracking',  lc: 'https://leetcode.com/problems/n-queens/', gfg: 'https://www.geeksforgeeks.org/n-queen-problem-backtracking-3/', pattern: 'Backtracking' },
-  { id: 53, title: 'Maximum Subarray',                 diff: 'Medium', cat: 'DP',            lc: 'https://leetcode.com/problems/maximum-subarray/', gfg: 'https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/', pattern: "Kadane's" },
-  { id: 56, title: 'Merge Intervals',                  diff: 'Medium', cat: 'Arrays',        lc: 'https://leetcode.com/problems/merge-intervals/', gfg: 'https://www.geeksforgeeks.org/merging-intervals/', pattern: 'Sort + Greedy' },
-  { id: 62, title: 'Unique Paths',                     diff: 'Medium', cat: 'DP',            lc: 'https://leetcode.com/problems/unique-paths/', gfg: 'https://www.geeksforgeeks.org/count-possible-paths-top-left-bottom-right-nxm-matrix/', pattern: '2D DP' },
-  { id: 70, title: 'Climbing Stairs',                  diff: 'Easy',   cat: 'DP',            lc: 'https://leetcode.com/problems/climbing-stairs/', gfg: 'https://www.geeksforgeeks.org/count-ways-reach-nth-stair/', pattern: 'Fibonacci DP' },
-  { id: 72, title: 'Edit Distance',                    diff: 'Hard',   cat: 'DP',            lc: 'https://leetcode.com/problems/edit-distance/', gfg: 'https://www.geeksforgeeks.org/edit-distance-dp-5/', pattern: '2D DP' },
-  { id: 76, title: 'Minimum Window Substring',         diff: 'Hard',   cat: 'Strings',       lc: 'https://leetcode.com/problems/minimum-window-substring/', gfg: 'https://www.geeksforgeeks.org/find-the-smallest-window-in-a-string-containing-all-characters-of-another-string/', pattern: 'Sliding Window' },
-  { id: 78, title: 'Subsets',                          diff: 'Medium', cat: 'Backtracking',  lc: 'https://leetcode.com/problems/subsets/', gfg: 'https://www.geeksforgeeks.org/power-set/', pattern: 'Backtracking / Bitmask' },
-  { id: 84, title: 'Largest Rectangle in Histogram',   diff: 'Hard',   cat: 'Stack',         lc: 'https://leetcode.com/problems/largest-rectangle-in-histogram/', gfg: 'https://www.geeksforgeeks.org/largest-rectangle-under-histogram/', pattern: 'Monotonic Stack' },
-  { id: 98, title: 'Validate Binary Search Tree',      diff: 'Medium', cat: 'Trees',         lc: 'https://leetcode.com/problems/validate-binary-search-tree/', gfg: 'https://www.geeksforgeeks.org/a-program-to-check-if-a-binary-tree-is-bst-or-not/', pattern: 'DFS with Bounds' },
-  { id: 102, title: 'Binary Tree Level Order Traversal', diff: 'Medium', cat: 'Trees',       lc: 'https://leetcode.com/problems/binary-tree-level-order-traversal/', gfg: 'https://www.geeksforgeeks.org/level-order-tree-traversal/', pattern: 'BFS' },
-  { id: 104, title: 'Maximum Depth of Binary Tree',    diff: 'Easy',   cat: 'Trees',         lc: 'https://leetcode.com/problems/maximum-depth-of-binary-tree/', gfg: 'https://www.geeksforgeeks.org/find-the-maximum-depth-or-height-of-a-tree/', pattern: 'DFS' },
-  { id: 121, title: 'Best Time to Buy and Sell Stock', diff: 'Easy',   cat: 'Arrays',        lc: 'https://leetcode.com/problems/best-time-to-buy-and-sell-stock/', gfg: 'https://www.geeksforgeeks.org/stock-buy-sell/', pattern: 'Greedy' },
-  { id: 124, title: 'Binary Tree Maximum Path Sum',    diff: 'Hard',   cat: 'Trees',         lc: 'https://leetcode.com/problems/binary-tree-maximum-path-sum/', gfg: 'https://www.geeksforgeeks.org/find-maximum-path-sum-in-a-binary-tree/', pattern: 'DFS with Global Max' },
-  { id: 127, title: 'Word Ladder',                     diff: 'Hard',   cat: 'Graphs',        lc: 'https://leetcode.com/problems/word-ladder/', gfg: 'https://www.geeksforgeeks.org/word-ladder-length-of-shortest-chain-to-reach-a-target-word/', pattern: 'BFS Shortest Path' },
-  { id: 131, title: 'Palindrome Partitioning',         diff: 'Medium', cat: 'Backtracking',  lc: 'https://leetcode.com/problems/palindrome-partitioning/', gfg: 'https://www.geeksforgeeks.org/given-a-string-print-all-possible-palindromic-partition/', pattern: 'Backtracking + DP' },
-  { id: 138, title: 'Copy List with Random Pointer',   diff: 'Medium', cat: 'Linked List',   lc: 'https://leetcode.com/problems/copy-list-with-random-pointer/', gfg: 'https://www.geeksforgeeks.org/a-linked-list-with-next-and-arbit-pointer/', pattern: 'HashMap' },
-  { id: 139, title: 'Word Break',                      diff: 'Medium', cat: 'DP',            lc: 'https://leetcode.com/problems/word-break/', gfg: 'https://www.geeksforgeeks.org/word-break-problem-dp-32/', pattern: 'DP + Trie' },
-  { id: 141, title: 'Linked List Cycle',               diff: 'Easy',   cat: 'Linked List',   lc: 'https://leetcode.com/problems/linked-list-cycle/', gfg: 'https://www.geeksforgeeks.org/detect-loop-in-a-linked-list/', pattern: "Floyd's Algorithm" },
-  { id: 146, title: 'LRU Cache',                       diff: 'Medium', cat: 'Design',        lc: 'https://leetcode.com/problems/lru-cache/', gfg: 'https://www.geeksforgeeks.org/lru-cache-implementation/', pattern: 'HashMap + DLL' },
+  { id: 19, title: 'Remove Nth Node From End', diff: 'Medium', cat: 'Linked List', lc: 'https://leetcode.com/problems/remove-nth-node-from-end-of-list/', gfg: 'https://www.geeksforgeeks.org/delete-nth-node-from-the-end-of-the-given-linked-list/', pattern: 'Fast & Slow Pointer' },
+  { id: 20, title: 'Valid Parentheses', diff: 'Easy', cat: 'Stack', lc: 'https://leetcode.com/problems/valid-parentheses/', gfg: 'https://www.geeksforgeeks.org/check-for-balanced-parentheses-in-an-expression/', pattern: 'Stack' },
+  { id: 21, title: 'Merge Two Sorted Lists', diff: 'Easy', cat: 'Linked List', lc: 'https://leetcode.com/problems/merge-two-sorted-lists/', gfg: 'https://www.geeksforgeeks.org/merge-two-sorted-linked-lists/', pattern: 'Two Pointers' },
+  { id: 23, title: 'Merge K Sorted Lists', diff: 'Hard', cat: 'Heap', lc: 'https://leetcode.com/problems/merge-k-sorted-lists/', gfg: 'https://www.geeksforgeeks.org/merge-k-sorted-linked-lists/', pattern: 'Min Heap' },
+  { id: 33, title: 'Search in Rotated Sorted Array', diff: 'Medium', cat: 'Binary Search', lc: 'https://leetcode.com/problems/search-in-rotated-sorted-array/', gfg: 'https://www.geeksforgeeks.org/search-an-element-in-a-sorted-and-pivoted-array/', pattern: 'Binary Search' },
+  { id: 39, title: 'Combination Sum', diff: 'Medium', cat: 'Backtracking', lc: 'https://leetcode.com/problems/combination-sum/', gfg: 'https://www.geeksforgeeks.org/combinational-sum/', pattern: 'Backtracking' },
+  { id: 42, title: 'Trapping Rain Water', diff: 'Hard', cat: 'Arrays', lc: 'https://leetcode.com/problems/trapping-rain-water/', gfg: 'https://www.geeksforgeeks.org/trapping-rain-water/', pattern: 'Two Pointers / Stack' },
+  { id: 46, title: 'Permutations', diff: 'Medium', cat: 'Backtracking', lc: 'https://leetcode.com/problems/permutations/', gfg: 'https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/', pattern: 'Backtracking' },
+  { id: 48, title: 'Rotate Image', diff: 'Medium', cat: 'Arrays', lc: 'https://leetcode.com/problems/rotate-image/', gfg: 'https://www.geeksforgeeks.org/rotate-a-matrix-by-90-degree-in-clockwise-direction-without-using-any-extra-space/', pattern: 'In-Place Matrix' },
+  { id: 49, title: 'Group Anagrams', diff: 'Medium', cat: 'Strings', lc: 'https://leetcode.com/problems/group-anagrams/', gfg: 'https://www.geeksforgeeks.org/given-a-sequence-of-words-print-all-anagrams-together/', pattern: 'Hash Map + Sort' },
+  { id: 51, title: 'N-Queens', diff: 'Hard', cat: 'Backtracking', lc: 'https://leetcode.com/problems/n-queens/', gfg: 'https://www.geeksforgeeks.org/n-queen-problem-backtracking-3/', pattern: 'Backtracking' },
+  { id: 53, title: 'Maximum Subarray', diff: 'Medium', cat: 'DP', lc: 'https://leetcode.com/problems/maximum-subarray/', gfg: 'https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/', pattern: "Kadane's" },
+  { id: 56, title: 'Merge Intervals', diff: 'Medium', cat: 'Arrays', lc: 'https://leetcode.com/problems/merge-intervals/', gfg: 'https://www.geeksforgeeks.org/merging-intervals/', pattern: 'Sort + Greedy' },
+  { id: 62, title: 'Unique Paths', diff: 'Medium', cat: 'DP', lc: 'https://leetcode.com/problems/unique-paths/', gfg: 'https://www.geeksforgeeks.org/count-possible-paths-top-left-bottom-right-nxm-matrix/', pattern: '2D DP' },
+  { id: 70, title: 'Climbing Stairs', diff: 'Easy', cat: 'DP', lc: 'https://leetcode.com/problems/climbing-stairs/', gfg: 'https://www.geeksforgeeks.org/count-ways-reach-nth-stair/', pattern: 'Fibonacci DP' },
+  { id: 72, title: 'Edit Distance', diff: 'Hard', cat: 'DP', lc: 'https://leetcode.com/problems/edit-distance/', gfg: 'https://www.geeksforgeeks.org/edit-distance-dp-5/', pattern: '2D DP' },
+  { id: 76, title: 'Minimum Window Substring', diff: 'Hard', cat: 'Strings', lc: 'https://leetcode.com/problems/minimum-window-substring/', gfg: 'https://www.geeksforgeeks.org/find-the-smallest-window-in-a-string-containing-all-characters-of-another-string/', pattern: 'Sliding Window' },
+  { id: 78, title: 'Subsets', diff: 'Medium', cat: 'Backtracking', lc: 'https://leetcode.com/problems/subsets/', gfg: 'https://www.geeksforgeeks.org/power-set/', pattern: 'Backtracking / Bitmask' },
+  { id: 84, title: 'Largest Rectangle in Histogram', diff: 'Hard', cat: 'Stack', lc: 'https://leetcode.com/problems/largest-rectangle-in-histogram/', gfg: 'https://www.geeksforgeeks.org/largest-rectangle-under-histogram/', pattern: 'Monotonic Stack' },
+  { id: 98, title: 'Validate Binary Search Tree', diff: 'Medium', cat: 'Trees', lc: 'https://leetcode.com/problems/validate-binary-search-tree/', gfg: 'https://www.geeksforgeeks.org/a-program-to-check-if-a-binary-tree-is-bst-or-not/', pattern: 'DFS with Bounds' },
+  { id: 102, title: 'Binary Tree Level Order Traversal', diff: 'Medium', cat: 'Trees', lc: 'https://leetcode.com/problems/binary-tree-level-order-traversal/', gfg: 'https://www.geeksforgeeks.org/level-order-tree-traversal/', pattern: 'BFS' },
+  { id: 104, title: 'Maximum Depth of Binary Tree', diff: 'Easy', cat: 'Trees', lc: 'https://leetcode.com/problems/maximum-depth-of-binary-tree/', gfg: 'https://www.geeksforgeeks.org/find-the-maximum-depth-or-height-of-a-tree/', pattern: 'DFS' },
+  { id: 121, title: 'Best Time to Buy and Sell Stock', diff: 'Easy', cat: 'Arrays', lc: 'https://leetcode.com/problems/best-time-to-buy-and-sell-stock/', gfg: 'https://www.geeksforgeeks.org/stock-buy-sell/', pattern: 'Greedy' },
+  { id: 124, title: 'Binary Tree Maximum Path Sum', diff: 'Hard', cat: 'Trees', lc: 'https://leetcode.com/problems/binary-tree-maximum-path-sum/', gfg: 'https://www.geeksforgeeks.org/find-maximum-path-sum-in-a-binary-tree/', pattern: 'DFS with Global Max' },
+  { id: 127, title: 'Word Ladder', diff: 'Hard', cat: 'Graphs', lc: 'https://leetcode.com/problems/word-ladder/', gfg: 'https://www.geeksforgeeks.org/word-ladder-length-of-shortest-chain-to-reach-a-target-word/', pattern: 'BFS Shortest Path' },
+  { id: 131, title: 'Palindrome Partitioning', diff: 'Medium', cat: 'Backtracking', lc: 'https://leetcode.com/problems/palindrome-partitioning/', gfg: 'https://www.geeksforgeeks.org/given-a-string-print-all-possible-palindromic-partition/', pattern: 'Backtracking + DP' },
+  { id: 138, title: 'Copy List with Random Pointer', diff: 'Medium', cat: 'Linked List', lc: 'https://leetcode.com/problems/copy-list-with-random-pointer/', gfg: 'https://www.geeksforgeeks.org/a-linked-list-with-next-and-arbit-pointer/', pattern: 'HashMap' },
+  { id: 139, title: 'Word Break', diff: 'Medium', cat: 'DP', lc: 'https://leetcode.com/problems/word-break/', gfg: 'https://www.geeksforgeeks.org/word-break-problem-dp-32/', pattern: 'DP + Trie' },
+  { id: 141, title: 'Linked List Cycle', diff: 'Easy', cat: 'Linked List', lc: 'https://leetcode.com/problems/linked-list-cycle/', gfg: 'https://www.geeksforgeeks.org/detect-loop-in-a-linked-list/', pattern: "Floyd's Algorithm" },
+  { id: 146, title: 'LRU Cache', diff: 'Medium', cat: 'Design', lc: 'https://leetcode.com/problems/lru-cache/', gfg: 'https://www.geeksforgeeks.org/lru-cache-implementation/', pattern: 'HashMap + DLL' },
   { id: 153, title: 'Find Minimum in Rotated Sorted Array', diff: 'Medium', cat: 'Binary Search', lc: 'https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/', gfg: 'https://www.geeksforgeeks.org/find-minimum-element-in-a-sorted-and-rotated-array/', pattern: 'Binary Search' },
-  { id: 155, title: 'Min Stack',                       diff: 'Medium', cat: 'Stack',         lc: 'https://leetcode.com/problems/min-stack/', gfg: 'https://www.geeksforgeeks.org/design-a-stack-that-supports-getmin-in-o1-time-and-o1-extra-space/', pattern: 'Stack Augmentation' },
-  { id: 162, title: 'Find Peak Element',               diff: 'Medium', cat: 'Binary Search', lc: 'https://leetcode.com/problems/find-peak-element/', gfg: 'https://www.geeksforgeeks.org/find-a-peak-in-a-given-array/', pattern: 'Binary Search' },
-  { id: 198, title: 'House Robber',                    diff: 'Medium', cat: 'DP',            lc: 'https://leetcode.com/problems/house-robber/', gfg: 'https://www.geeksforgeeks.org/find-maximum-possible-stolen-value-houses/', pattern: 'Linear DP' },
-  { id: 200, title: 'Number of Islands',               diff: 'Medium', cat: 'Graphs',        lc: 'https://leetcode.com/problems/number-of-islands/', gfg: 'https://www.geeksforgeeks.org/find-the-number-of-islands-using-dfs/', pattern: 'DFS/BFS Grid' },
-  { id: 206, title: 'Reverse Linked List',             diff: 'Easy',   cat: 'Linked List',   lc: 'https://leetcode.com/problems/reverse-linked-list/', gfg: 'https://www.geeksforgeeks.org/reverse-a-linked-list/', pattern: 'Iteration / Recursion' },
-  { id: 207, title: 'Course Schedule',                 diff: 'Medium', cat: 'Graphs',        lc: 'https://leetcode.com/problems/course-schedule/', gfg: 'https://www.geeksforgeeks.org/topological-sorting/', pattern: 'Topological Sort' },
-  { id: 212, title: 'Word Search II',                  diff: 'Hard',   cat: 'Backtracking',  lc: 'https://leetcode.com/problems/word-search-ii/', gfg: 'https://www.geeksforgeeks.org/boggle-find-possible-words-board-characters/', pattern: 'Backtracking + Trie' },
-  { id: 215, title: 'Kth Largest Element in Array',    diff: 'Medium', cat: 'Heap',          lc: 'https://leetcode.com/problems/kth-largest-element-in-an-array/', gfg: 'https://www.geeksforgeeks.org/kth-smallest-largest-element-in-unsorted-array/', pattern: 'Min Heap / QuickSelect' },
-  { id: 226, title: 'Invert Binary Tree',              diff: 'Easy',   cat: 'Trees',         lc: 'https://leetcode.com/problems/invert-binary-tree/', gfg: 'https://www.geeksforgeeks.org/write-an-efficient-c-function-to-convert-a-tree-into-its-mirror-tree/', pattern: 'DFS' },
-  { id: 230, title: 'Kth Smallest in BST',             diff: 'Medium', cat: 'Trees',         lc: 'https://leetcode.com/problems/kth-smallest-element-in-a-bst/', gfg: 'https://www.geeksforgeeks.org/find-k-th-smallest-element-in-bst-order-statistics-in-bst/', pattern: 'Inorder DFS' },
-  { id: 235, title: 'Lowest Common Ancestor BST',      diff: 'Medium', cat: 'Trees',         lc: 'https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/', gfg: 'https://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/', pattern: 'DFS' },
-  { id: 238, title: 'Product of Array Except Self',    diff: 'Medium', cat: 'Arrays',        lc: 'https://leetcode.com/problems/product-of-array-except-self/', gfg: 'https://www.geeksforgeeks.org/product-array-puzzle/', pattern: 'Prefix Product' },
-  { id: 239, title: 'Sliding Window Maximum',          diff: 'Hard',   cat: 'Stack',         lc: 'https://leetcode.com/problems/sliding-window-maximum/', gfg: 'https://www.geeksforgeeks.org/sliding-window-maximum-maximum-of-all-subarrays-of-size-k/', pattern: 'Monotonic Deque' },
-  { id: 295, title: 'Find Median from Data Stream',    diff: 'Hard',   cat: 'Heap',          lc: 'https://leetcode.com/problems/find-median-from-data-stream/', gfg: 'https://www.geeksforgeeks.org/median-of-stream-of-integers-running-integers/', pattern: 'Two Heaps' },
-  { id: 297, title: 'Serialize and Deserialize BT',    diff: 'Hard',   cat: 'Trees',         lc: 'https://leetcode.com/problems/serialize-and-deserialize-binary-tree/', gfg: 'https://www.geeksforgeeks.org/serialize-deserialize-binary-tree/', pattern: 'BFS / DFS' },
-  { id: 300, title: 'Longest Increasing Subsequence',  diff: 'Medium', cat: 'DP',            lc: 'https://leetcode.com/problems/longest-increasing-subsequence/', gfg: 'https://www.geeksforgeeks.org/longest-increasing-subsequence-dp-3/', pattern: 'DP + Binary Search' },
-  { id: 312, title: 'Burst Balloons',                  diff: 'Hard',   cat: 'DP',            lc: 'https://leetcode.com/problems/burst-balloons/', gfg: 'https://www.geeksforgeeks.org/burst-balloon-to-maximize-coins/', pattern: 'Interval DP' },
-  { id: 322, title: 'Coin Change',                     diff: 'Medium', cat: 'DP',            lc: 'https://leetcode.com/problems/coin-change/', gfg: 'https://www.geeksforgeeks.org/coin-change-dp-7/', pattern: 'Unbounded Knapsack' },
-  { id: 347, title: 'Top K Frequent Elements',         diff: 'Medium', cat: 'Heap',          lc: 'https://leetcode.com/problems/top-k-frequent-elements/', gfg: 'https://www.geeksforgeeks.org/find-k-numbers-occurrences-given-array/', pattern: 'Max Heap / Bucket Sort' },
-  { id: 394, title: 'Decode String',                   diff: 'Medium', cat: 'Stack',         lc: 'https://leetcode.com/problems/decode-string/', gfg: 'https://www.geeksforgeeks.org/decode-string-recursively-encoded-count-followed-substring/', pattern: 'Stack' },
-  { id: 416, title: 'Partition Equal Subset Sum',      diff: 'Medium', cat: 'DP',            lc: 'https://leetcode.com/problems/partition-equal-subset-sum/', gfg: 'https://www.geeksforgeeks.org/partition-problem-dp-18/', pattern: '0/1 Knapsack' },
-  { id: 543, title: 'Diameter of Binary Tree',         diff: 'Easy',   cat: 'Trees',         lc: 'https://leetcode.com/problems/diameter-of-binary-tree/', gfg: 'https://www.geeksforgeeks.org/diameter-of-a-binary-tree/', pattern: 'DFS' },
-  { id: 621, title: 'Task Scheduler',                  diff: 'Medium', cat: 'Heap',          lc: 'https://leetcode.com/problems/task-scheduler/', gfg: 'https://www.geeksforgeeks.org/task-scheduler/', pattern: 'Greedy + Heap' },
-  { id: 704, title: 'Binary Search',                   diff: 'Easy',   cat: 'Binary Search', lc: 'https://leetcode.com/problems/binary-search/', gfg: 'https://www.geeksforgeeks.org/binary-search/', pattern: 'Classic Binary Search' },
-  { id: 739, title: 'Daily Temperatures',              diff: 'Medium', cat: 'Stack',         lc: 'https://leetcode.com/problems/daily-temperatures/', gfg: 'https://www.geeksforgeeks.org/next-greater-element/', pattern: 'Monotonic Stack' },
-  { id: 875, title: 'Koko Eating Bananas',             diff: 'Medium', cat: 'Binary Search', lc: 'https://leetcode.com/problems/koko-eating-bananas/', gfg: 'https://www.geeksforgeeks.org/koko-eating-bananas/', pattern: 'Binary Search on Answer' },
-  { id: 973, title: 'K Closest Points to Origin',      diff: 'Medium', cat: 'Heap',          lc: 'https://leetcode.com/problems/k-closest-points-to-origin/', gfg: 'https://www.geeksforgeeks.org/find-k-closest-points-to-the-origin/', pattern: 'Max Heap' },
+  { id: 155, title: 'Min Stack', diff: 'Medium', cat: 'Stack', lc: 'https://leetcode.com/problems/min-stack/', gfg: 'https://www.geeksforgeeks.org/design-a-stack-that-supports-getmin-in-o1-time-and-o1-extra-space/', pattern: 'Stack Augmentation' },
+  { id: 162, title: 'Find Peak Element', diff: 'Medium', cat: 'Binary Search', lc: 'https://leetcode.com/problems/find-peak-element/', gfg: 'https://www.geeksforgeeks.org/find-a-peak-in-a-given-array/', pattern: 'Binary Search' },
+  { id: 198, title: 'House Robber', diff: 'Medium', cat: 'DP', lc: 'https://leetcode.com/problems/house-robber/', gfg: 'https://www.geeksforgeeks.org/find-maximum-possible-stolen-value-houses/', pattern: 'Linear DP' },
+  { id: 200, title: 'Number of Islands', diff: 'Medium', cat: 'Graphs', lc: 'https://leetcode.com/problems/number-of-islands/', gfg: 'https://www.geeksforgeeks.org/find-the-number-of-islands-using-dfs/', pattern: 'DFS/BFS Grid' },
+  { id: 206, title: 'Reverse Linked List', diff: 'Easy', cat: 'Linked List', lc: 'https://leetcode.com/problems/reverse-linked-list/', gfg: 'https://www.geeksforgeeks.org/reverse-a-linked-list/', pattern: 'Iteration / Recursion' },
+  { id: 207, title: 'Course Schedule', diff: 'Medium', cat: 'Graphs', lc: 'https://leetcode.com/problems/course-schedule/', gfg: 'https://www.geeksforgeeks.org/topological-sorting/', pattern: 'Topological Sort' },
+  { id: 212, title: 'Word Search II', diff: 'Hard', cat: 'Backtracking', lc: 'https://leetcode.com/problems/word-search-ii/', gfg: 'https://www.geeksforgeeks.org/boggle-find-possible-words-board-characters/', pattern: 'Backtracking + Trie' },
+  { id: 215, title: 'Kth Largest Element in Array', diff: 'Medium', cat: 'Heap', lc: 'https://leetcode.com/problems/kth-largest-element-in-an-array/', gfg: 'https://www.geeksforgeeks.org/kth-smallest-largest-element-in-unsorted-array/', pattern: 'Min Heap / QuickSelect' },
+  { id: 226, title: 'Invert Binary Tree', diff: 'Easy', cat: 'Trees', lc: 'https://leetcode.com/problems/invert-binary-tree/', gfg: 'https://www.geeksforgeeks.org/write-an-efficient-c-function-to-convert-a-tree-into-its-mirror-tree/', pattern: 'DFS' },
+  { id: 230, title: 'Kth Smallest in BST', diff: 'Medium', cat: 'Trees', lc: 'https://leetcode.com/problems/kth-smallest-element-in-a-bst/', gfg: 'https://www.geeksforgeeks.org/find-k-th-smallest-element-in-bst-order-statistics-in-bst/', pattern: 'Inorder DFS' },
+  { id: 235, title: 'Lowest Common Ancestor BST', diff: 'Medium', cat: 'Trees', lc: 'https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/', gfg: 'https://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/', pattern: 'DFS' },
+  { id: 238, title: 'Product of Array Except Self', diff: 'Medium', cat: 'Arrays', lc: 'https://leetcode.com/problems/product-of-array-except-self/', gfg: 'https://www.geeksforgeeks.org/product-array-puzzle/', pattern: 'Prefix Product' },
+  { id: 239, title: 'Sliding Window Maximum', diff: 'Hard', cat: 'Stack', lc: 'https://leetcode.com/problems/sliding-window-maximum/', gfg: 'https://www.geeksforgeeks.org/sliding-window-maximum-maximum-of-all-subarrays-of-size-k/', pattern: 'Monotonic Deque' },
+  { id: 295, title: 'Find Median from Data Stream', diff: 'Hard', cat: 'Heap', lc: 'https://leetcode.com/problems/find-median-from-data-stream/', gfg: 'https://www.geeksforgeeks.org/median-of-stream-of-integers-running-integers/', pattern: 'Two Heaps' },
+  { id: 297, title: 'Serialize and Deserialize BT', diff: 'Hard', cat: 'Trees', lc: 'https://leetcode.com/problems/serialize-and-deserialize-binary-tree/', gfg: 'https://www.geeksforgeeks.org/serialize-deserialize-binary-tree/', pattern: 'BFS / DFS' },
+  { id: 300, title: 'Longest Increasing Subsequence', diff: 'Medium', cat: 'DP', lc: 'https://leetcode.com/problems/longest-increasing-subsequence/', gfg: 'https://www.geeksforgeeks.org/longest-increasing-subsequence-dp-3/', pattern: 'DP + Binary Search' },
+  { id: 312, title: 'Burst Balloons', diff: 'Hard', cat: 'DP', lc: 'https://leetcode.com/problems/burst-balloons/', gfg: 'https://www.geeksforgeeks.org/burst-balloon-to-maximize-coins/', pattern: 'Interval DP' },
+  { id: 322, title: 'Coin Change', diff: 'Medium', cat: 'DP', lc: 'https://leetcode.com/problems/coin-change/', gfg: 'https://www.geeksforgeeks.org/coin-change-dp-7/', pattern: 'Unbounded Knapsack' },
+  { id: 347, title: 'Top K Frequent Elements', diff: 'Medium', cat: 'Heap', lc: 'https://leetcode.com/problems/top-k-frequent-elements/', gfg: 'https://www.geeksforgeeks.org/find-k-numbers-occurrences-given-array/', pattern: 'Max Heap / Bucket Sort' },
+  { id: 394, title: 'Decode String', diff: 'Medium', cat: 'Stack', lc: 'https://leetcode.com/problems/decode-string/', gfg: 'https://www.geeksforgeeks.org/decode-string-recursively-encoded-count-followed-substring/', pattern: 'Stack' },
+  { id: 416, title: 'Partition Equal Subset Sum', diff: 'Medium', cat: 'DP', lc: 'https://leetcode.com/problems/partition-equal-subset-sum/', gfg: 'https://www.geeksforgeeks.org/partition-problem-dp-18/', pattern: '0/1 Knapsack' },
+  { id: 543, title: 'Diameter of Binary Tree', diff: 'Easy', cat: 'Trees', lc: 'https://leetcode.com/problems/diameter-of-binary-tree/', gfg: 'https://www.geeksforgeeks.org/diameter-of-a-binary-tree/', pattern: 'DFS' },
+  { id: 621, title: 'Task Scheduler', diff: 'Medium', cat: 'Heap', lc: 'https://leetcode.com/problems/task-scheduler/', gfg: 'https://www.geeksforgeeks.org/task-scheduler/', pattern: 'Greedy + Heap' },
+  { id: 704, title: 'Binary Search', diff: 'Easy', cat: 'Binary Search', lc: 'https://leetcode.com/problems/binary-search/', gfg: 'https://www.geeksforgeeks.org/binary-search/', pattern: 'Classic Binary Search' },
+  { id: 739, title: 'Daily Temperatures', diff: 'Medium', cat: 'Stack', lc: 'https://leetcode.com/problems/daily-temperatures/', gfg: 'https://www.geeksforgeeks.org/next-greater-element/', pattern: 'Monotonic Stack' },
+  { id: 875, title: 'Koko Eating Bananas', diff: 'Medium', cat: 'Binary Search', lc: 'https://leetcode.com/problems/koko-eating-bananas/', gfg: 'https://www.geeksforgeeks.org/koko-eating-bananas/', pattern: 'Binary Search on Answer' },
+  { id: 973, title: 'K Closest Points to Origin', diff: 'Medium', cat: 'Heap', lc: 'https://leetcode.com/problems/k-closest-points-to-origin/', gfg: 'https://www.geeksforgeeks.org/find-k-closest-points-to-the-origin/', pattern: 'Max Heap' },
 ]
 
 const CATEGORIES = ['All', ...new Set(ALL_QUESTIONS.map(q => q.cat))]
@@ -849,7 +849,7 @@ const DIFFS = ['All', 'Easy', 'Medium', 'Hard']
 // ─── COMPLEXITY ───────────────────────────────────────────────────────────
 
 const COMPLEXITIES = [
-  { name: 'O(1)', label: 'Constant', color: '#10B981', bar: 4,  examples: ['Array access by index', 'Hash map lookup', 'Stack push/pop', 'Math operations'] },
+  { name: 'O(1)', label: 'Constant', color: '#10B981', bar: 4, examples: ['Array access by index', 'Hash map lookup', 'Stack push/pop', 'Math operations'] },
   { name: 'O(log n)', label: 'Logarithmic', color: '#3B82F6', bar: 14, examples: ['Binary Search', 'BST operations', 'Heap insert/delete', 'Finding exponent'] },
   { name: 'O(n)', label: 'Linear', color: '#8B5CF6', bar: 30, examples: ['Linear scan', 'BFS/DFS traversal', 'Building hash map', 'Single pass DP'] },
   { name: 'O(n log n)', label: 'Linearithmic', color: '#F59E0B', bar: 50, examples: ['Merge Sort', 'Quick Sort (avg)', 'Heap Sort', 'Building segment tree'] },
@@ -957,24 +957,24 @@ const TIPS = [
 // ─── HELPERS ──────────────────────────────────────────────────────────────
 
 const diffStyle = (d) =>
-  d === 'Easy'   ? { bg: '#F0FDF4', color: '#15803D', border: '#BBF7D0' } :
-  d === 'Medium' ? { bg: '#FEFCE8', color: '#A16207', border: '#FEF08A' } :
-                   { bg: '#FFF1F2', color: '#BE123C', border: '#FECDD3' }
+  d === 'Easy' ? { bg: '#F0FDF4', color: '#15803D', border: '#BBF7D0' } :
+    d === 'Medium' ? { bg: '#FEFCE8', color: '#A16207', border: '#FEF08A' } :
+      { bg: '#FFF1F2', color: '#BE123C', border: '#FECDD3' }
 
 // ─── COMPONENT ────────────────────────────────────────────────────────────
 
 const DSACoding = () => {
   const navigate = useNavigate()
-  const [tab, setTab]           = useState('algorithms')
+  const [tab, setTab] = useState('algorithms')
   const [openAlgo, setOpenAlgo] = useState(null)
   const [openAlgoItem, setOpenAlgoItem] = useState(null)
   const [catFilter, setCatFilter] = useState('All')
   const [diffFilter, setDiffFilter] = useState('All')
-  const [search, setSearch]     = useState('')
+  const [search, setSearch] = useState('')
   const [openConcept, setOpenConcept] = useState(null)
 
   const filteredQ = ALL_QUESTIONS.filter(q => {
-    const matchCat  = catFilter  === 'All' || q.cat === catFilter
+    const matchCat = catFilter === 'All' || q.cat === catFilter
     const matchDiff = diffFilter === 'All' || q.diff === diffFilter
     const matchSrch = q.title.toLowerCase().includes(search.toLowerCase()) || q.pattern.toLowerCase().includes(search.toLowerCase())
     return matchCat && matchDiff && matchSrch
@@ -1003,68 +1003,79 @@ const DSACoding = () => {
       `}</style>
 
       {/* ── NAVBAR ── */}
-  <nav
-  style={{
-    background: "#0D0D15",
-    borderBottom: "1px solid #1E1E2E",
-    position: "sticky",
-    top: 0,
-    zIndex: 50,
-    backdropFilter: "blur(12px)",
-  }}
->
-  <div
-    style={{
-      maxWidth: 1400,
-      margin: "0 auto",
-      padding: "10px 16px",
-      display: "flex",
-      flexWrap: "wrap",
-      alignItems: "center",
-      justifyContent: "space-between",
-      gap: "12px",
-    }}
-  >
-    <img
-      onClick={() => navigate("/")}
-      src={logo}
-      alt="logo"
-      style={{
-        height: 55,
-        cursor: "pointer",
-        borderRadius: 4,
-      }}
-    />
-
-    <div
-      style={{
-        display: "flex",
-        gap: 8,
-        flexWrap: "wrap",
-        justifyContent: "center",
-      }}
-    >
-      {NAV.map((n) => (
-        <button
-          key={n.id}
-          onClick={() => setTab(n.id)}
-          className="tab-btn"
+      <nav
+        style={{
+          background: "#0F172A",
+          position: "sticky",
+          top: 0,
+          zIndex: 50,
+          borderBottom: "1px solid #1E293B",
+        }}
+      >
+        <div
           style={{
-            padding: "8px 12px",
-            borderRadius: 8,
-            fontSize: 14,
-            fontWeight: 600,
-            color: tab === n.id ? "#fff" : "#666",
-            background: tab === n.id ? "#6366F1" : "transparent",
-            whiteSpace: "nowrap",
+            maxWidth: 1400,
+            margin: "0 auto",
+            padding: "10px 16px",
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: "12px",
           }}
         >
-          {n.icon} {n.label}
-        </button>
-      ))}
-    </div>
-  </div>
-</nav>
+          {/* LOGO (always visible) */}
+          <img
+            onClick={() => navigate("/")}
+            src={logo}
+            alt="logo"
+            style={{
+              height: 50,
+              cursor: "pointer",
+              borderRadius: 2,
+            }}
+          />
+
+          {/* NAV ITEMS */}
+          <div
+            className="navItems"
+            style={{
+              display: "flex",
+              gap: 8,
+              flexWrap: "wrap",
+              justifyContent: "center",
+            }}
+          >
+            {NAV.map((n) => (
+              <button
+                key={n.id}
+                onClick={() => setTab(n.id)}
+                className="btn"
+                style={{
+                  padding: "8px 12px",
+                  borderRadius: 8,
+                  fontSize: 14,
+                  fontWeight: 600,
+                  color: tab === n.id ? "#fff" : "#94A3B8",
+                  background: tab === n.id ? "#6366F1" : "transparent",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {n.icon} {n.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* CSS */}
+        <style>{`
+    @media (max-width: 768px) {
+      .navItems {
+        display: none !important;
+      }
+    }
+  `}</style>
+      </nav>
 
       {/* ── HERO ── */}
       <header style={{ background: 'linear-gradient(135deg, #0D0D1F 0%, #111130 50%, #0D1520 100%)', padding: '80px 24px 60px', position: 'relative', overflow: 'hidden' }}>
@@ -1076,7 +1087,7 @@ const DSACoding = () => {
             <span style={{ fontSize: 12, fontWeight: 600, color: '#A5B4FC', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Complete DSA Reference & Coding Guide</span>
           </div>
           <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 'clamp(36px, 6vw, 64px)', fontWeight: 700, lineHeight: 1.1, marginBottom: 20, background: 'linear-gradient(135deg, #E8E8FF 0%, #A5B4FC 50%, #67E8F9 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-            DSA Coding 
+            DSA Coding
           </h1>
           <p style={{ fontSize: 18, color: '#6B7280', maxWidth: 600, margin: '0 auto 40px', lineHeight: 1.7 }}>
             Every algorithm with code. Every question linked to LeetCode & GFG. Big-O guide, data structures, and interview strategies — all in one premium reference.
@@ -1482,14 +1493,14 @@ const DSACoding = () => {
       </div>
 
       {/* ── FOOTER ── */}
-      <footer style={{ background: '#060609', borderTop: '1px solid #1A1A2E', padding: '40px 24px', marginTop: 40,  }}>
+      <footer style={{ background: '#060609', borderTop: '1px solid #1A1A2E', padding: '40px 24px', marginTop: 40, }}>
         <div style={{ maxWidth: 1400, margin: '0 auto', textAlign: 'center' }}>
           <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 18, fontWeight: 700, color: '#818CF8', marginBottom: 8 }}>DSA Mastery Hub</div>
           <p style={{ fontSize: 13, color: '#374151', marginBottom: 16 }}>Every algorithm. Every pattern. Every question — linked and ready.</p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: 16, flexWrap: 'wrap', marginBottom: 20 }}>
             {NAV.map(n => <span key={n.id} style={{ fontSize: 12, color: '#1F2937' }}>{n.icon} {n.label}</span>)}
           </div>
-          <p style={{ fontSize: 11, color: '#111827', borderTop: '1px solid #111120', paddingTop: 16}}>
+          <p style={{ fontSize: 11, color: '#111827', borderTop: '1px solid #111120', paddingTop: 16 }}>
             © 2026 aiplacprep@gmail.com — Built for engineers aiming at FAANG and top tech companies.
           </p>
         </div>

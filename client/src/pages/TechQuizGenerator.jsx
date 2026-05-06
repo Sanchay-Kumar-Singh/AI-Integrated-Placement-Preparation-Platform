@@ -40,15 +40,15 @@ function parseQuiz(raw) {
 
 // ── Shared styles ──────────────────────────────────────────────────────────
 const styles = {
-  wrap: {
-    minHeight: "100vh",
-    background: "#0b0b10",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "2rem 1rem",
-    fontFamily: "'Inter', system-ui, sans-serif",
-  },
+wrap: {
+  minHeight: "100vh",
+  background: "#f5f5f5", // light background so shadow is visible
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  padding: "2rem 1rem",
+  fontFamily: "'Inter', system-ui, sans-serif",
+},
   card: {
     background: "#111118",
     border: "1px solid #1e1e2c",
