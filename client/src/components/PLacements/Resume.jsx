@@ -1233,90 +1233,269 @@ const Resume = () => {
 
         </div>
 
-        {/* ════════════════════════════════════════════
-            TEAM / CREATORS SECTION
-        ════════════════════════════════════════════ */}
-        <section className="r-team-section">
-          <div className="r-team-inner">
-            <div className="r-team-header">
-              <h2>Meet the Creators</h2>
-              <p>The team behind this guide — experienced developers dedicated to helping job seekers succeed.</p>
-              <div className="r-team-divider" />
+   {/* ════════════════════════════════════════════
+    TEAM / CREATORS SECTION
+════════════════════════════════════════════ */}
+
+<section className="w-full bg-slate-50 py-14 sm:py-16 lg:py-20 px-4">
+
+  {/* MAIN WRAPPER */}
+  <div className="max-w-7xl mx-auto flex flex-col items-center">
+
+    {/* HEADER */}
+    <div className="text-center mb-14 w-full">
+
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900">
+        Meet the Creators
+      </h2>
+
+
+      <div className="w-20 h-1 bg-blue-600 rounded-full mx-auto mt-5"></div>
+    </div>
+
+    {/* TEAM GRID */}
+    <div className="flex flex-col gap-10 items-center justify-center w-full">
+
+      {teamMembers.map((member, i) => (
+        <div
+          key={i}
+          className="
+            w-full
+            max-w-6xl
+            mx-auto
+
+            bg-white
+            border border-slate-200
+            rounded-3xl
+            shadow-lg
+
+            overflow-hidden
+
+            flex
+            flex-col
+            xl:flex-row
+
+            transition-all duration-300
+            hover:shadow-2xl
+          "
+        >
+
+          {/* LEFT SIDE */}
+          <div
+            className="
+              w-full
+              xl:w-[320px]
+
+              bg-slate-50
+
+              flex
+              flex-col
+              items-center
+              justify-center
+
+              text-center
+
+              p-5 sm:p-7
+
+              border-b
+              xl:border-b-0
+              xl:border-r
+
+              border-slate-200
+            "
+          >
+
+            <img
+              src={member.photo}
+              alt={member.name}
+              className="
+                w-full
+                max-w-[220px]
+                sm:max-w-[260px]
+
+                h-[300px]
+                sm:h-[360px]
+                lg:h-[390px]
+
+                object-cover
+
+                rounded-2xl
+                border-[3px]
+                border-[#e7e4dd]
+
+                shadow-md
+                mb-5
+              "
+            />
+
+            <div className="text-xl sm:text-2xl font-bold text-slate-900">
+              {member.name}
             </div>
 
-            <div className="r-team-grid">
-              {teamMembers.map((member, i) => (
-                <div key={i} className="r-member-card">
-                  {/* Left: Photo / Avatar + Name */}
-                  <div className="r-member-left">
-                    {/* <div className="r-avatar" style={{ backgroundColor: member.color }}>
-                      {member.initials}
-                    </div> */}
-                   
-                      <img 
-                        src={member.photo}  // import photo at top of file
-                        alt={member.name}
-                        style={{ width: 250, height: 388, borderRadius: '', objectFit: 'cover', border: '3px solid #e7e4dd', marginBottom: '0.85rem' }}
-                      />
-                   
-                    <div className="r-member-name">{member.name}</div>
-                    <div className="r-member-role">{member.role}</div>
-                  </div>
-
-                  {/* Right: Bio + Resume PDF Viewer */}
-                  <div className="r-member-right">
-                    <p className="r-member-bio">{member.bio}</p>
-
-                    <div className="r-resume-viewer">
-                      <div className="r-resume-viewer-header">
-                        <span className="r-resume-viewer-label">📄 Resume Preview</span>
-                        <div className="r-resume-viewer-actions">
-                          <a
-                            href={member.resumeUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="r-open-btn"
-                            style={{ backgroundColor: member.color }}
-                          >
-                            Open PDF
-                          </a>
-                          <a
-                            href={member.resumeUrl}
-                            download
-                            className="r-open-btn"
-                            style={{ backgroundColor: '#374151' }}
-                          >
-                            Download
-                          </a>
-                        </div>
-                      </div>
-                      {/* PDF Embed — shows inline preview if PDF is accessible */}
-                      <object
-                        data={member.resumeUrl}
-                        type="application/pdf"
-                        className="r-pdf-embed"
-                      >
-                        {/* Fallback if browser can't embed PDF */}
-                        <div className="r-pdf-fallback">
-                          <span className="r-pdf-fallback-icon">📄</span>
-                          <span className="r-pdf-fallback-text">PDF preview not available in this browser</span>
-                          <a
-                            href={member.resumeUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{ backgroundColor: member.color }}
-                          >
-                            View Resume →
-                          </a>
-                        </div>
-                      </object>
-                    </div>
-                  </div>
-                </div>
-              ))}
+            <div className="text-sm sm:text-base text-slate-500 mt-1">
+              {member.role}
             </div>
           </div>
-        </section>
+
+          {/* RIGHT SIDE */}
+          <div className="flex-1 p-4 sm:p-6 lg:p-8 flex flex-col justify-center">
+
+            {/* BIO */}
+            <p
+              className="
+                text-slate-700
+                text-sm
+                sm:text-base
+
+                leading-7
+                sm:leading-8
+
+                text-center
+                xl:text-left
+
+                mb-8
+              "
+            >
+              {member.bio}
+            </p>
+
+            {/* RESUME VIEWER */}
+            <div className="border border-slate-200 rounded-2xl overflow-hidden">
+
+              {/* HEADER */}
+              <div
+                className="
+                  bg-slate-50
+                  border-b border-slate-200
+
+                  px-4
+                  sm:px-5
+                  py-4
+
+                  flex
+                  flex-col
+                  md:flex-row
+
+                  items-center
+                  md:justify-between
+
+                  gap-4
+                "
+              >
+
+                <span className="font-semibold text-slate-800 text-sm sm:text-base text-center">
+                  📄 Resume Preview
+                </span>
+
+                {/* BUTTONS */}
+                <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+
+                  <a
+                    href={member.resumeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="
+                      flex-1
+                      md:flex-none
+
+                      text-center
+                      text-white
+
+                      text-sm
+                      font-semibold
+
+                      px-5 py-2.5
+                      rounded-xl
+
+                      transition-all duration-300
+                      hover:scale-[1.02]
+                    "
+                    style={{ backgroundColor: member.color }}
+                  >
+                    Open PDF
+                  </a>
+
+                  <a
+                    href={member.resumeUrl}
+                    download
+                    className="
+                      flex-1
+                      md:flex-none
+
+                      text-center
+
+                      bg-slate-700
+                      hover:bg-slate-800
+
+                      text-white
+                      text-sm
+                      font-semibold
+
+                      px-5 py-2.5
+                      rounded-xl
+
+                      transition-all duration-300
+                    "
+                  >
+                    Download
+                  </a>
+                </div>
+              </div>
+
+              {/* PDF VIEWER */}
+              <object
+                data={member.resumeUrl}
+                type="application/pdf"
+                className="
+                  w-full
+
+                  h-[280px]
+                  sm:h-[400px]
+                  md:h-[500px]
+                  lg:h-[650px]
+                "
+              >
+
+                {/* FALLBACK */}
+                <div className="flex flex-col items-center justify-center text-center px-4 py-12">
+
+                  <span className="text-5xl mb-4">
+                    📄
+                  </span>
+
+                  <span className="text-slate-500 text-sm sm:text-base mb-5">
+                    PDF preview not available in this browser
+                  </span>
+
+                  <a
+                    href={member.resumeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="
+                      inline-flex
+                      items-center
+                      justify-center
+
+                      text-white
+                      text-sm
+                      font-semibold
+
+                      px-5 py-3
+                      rounded-xl
+                    "
+                    style={{ backgroundColor: member.color }}
+                  >
+                    View Resume →
+                  </a>
+                </div>
+              </object>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
 
         {/* ── FOOTER ── */}
         <footer className="r-footer">
